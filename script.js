@@ -110,13 +110,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateSpinTable() {
-        // Logic to update the spin table (e.g., randomize the images)
-        const cells = spinTable.querySelectorAll('img');
-        cells.forEach(cell => {
-            const randomImageIndex = Math.floor(Math.random() * 10); // Randomize images (assuming 10 images)
-            cell.src = `image_${randomImageIndex}.png`; // Update the image source
-        });
-    }
+    // Logic to update the spin table (e.g., randomize the images)
+    const cells = spinTable.querySelectorAll('img');
+    cells.forEach(cell => {
+        const randomImageIndex = Math.floor(Math.random() * 10); // Randomize images (assuming 10 images)
+        cell.src = `image_${randomImageIndex}.png`; // Update the image source
+        cell.style.animation = 'spin 0.3s linear'; // Menambahkan animasi spin pada gambar
+    });
+}
+
 
     function checkWinCondition() {
         // Logic to check if the player won (placeholder logic)
