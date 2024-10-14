@@ -29,10 +29,12 @@
     </nav>
 
     <div id="game-container">
+        <div id="score-panel">
+            <span id="saldo">Saldo: Rp 1000.00</span>
+        </div>
         <div id="game-board">
             <table>
                 <tbody id="spin-table">
-                    <!-- Game grid layout remains the same -->
                     <tr>
                         <td><img src="coin.png" id="cell-1-1" /></td>
                         <td><img src="Diamond.png" id="cell-1-2" /></td>
@@ -87,54 +89,32 @@
                         <td><img src="coin.png" id="cell-6-6" /></td>
                         <td><img src="treasure-chest.png" id="cell-6-7" /></td>
                     </tr>
-                    <!-- More rows here... -->
                 </tbody>
             </table>
         </div>
-
-        <div id="controls-panel">
+        <div id="spin-controls">
             <div class="bet-controls">
-                <label for="bet-amount">Taruhan:</label>
                 <button id="bet-decrease">-</button>
-                <input type="text" id="bet-amount" value="200" readonly>
+                <input type="number" id="bet-amount" value="200" readonly />
                 <button id="bet-increase">+</button>
             </div>
-
             <div class="multiplier-controls">
-                <label for="multiplier">Perkalian:</label>
                 <button id="multiplier-decrease">-</button>
-                <input type="text" id="multiplier" value="2" readonly>
+                <input type="number" id="multiplier" value="2" readonly />
                 <button id="multiplier-increase">+</button>
             </div>
-            
-            <!-- Spin buttons are aligned as requested -->
-            <div class="spin-controls">
-                <button id="spin-button">Spin</button>
-                <div class="dropdown">
-                    <button id="auto-spin-button">Auto Spin</button>
-                    <div class="dropdown-content hidden">
-                        <button class="auto-spin-option">10x</button>
-                        <button class="auto-spin-option">20x</button>
-                        <button class="auto-spin-option">50x</button>
-                        <button class="auto-spin-option">100x</button>
-                    </div>
+            <button id="spin-button">Spin</button>
+            <div class="dropdown" id="auto-spin-button">
+                <button>Auto Spin</button>
+                <div class="dropdown-content">
+                    <button onclick="startAutoSpin(10)">10 Spins</button>
+                    <button onclick="startAutoSpin(20)">20 Spins</button>
+                    <button onclick="startAutoSpin(50)">50 Spins</button>
                 </div>
             </div>
         </div>
-
-        <div id="score-panel">
-            <h2>Saldo: <span id="score">Rp 1000.00</span></h2>
-        </div>
-        
-        <div id="win-message" class="hidden">You Win!</div>
-
-
-        <div id="warning-message" class="hidden">Anda tidak punya saldo lagi untuk bermain!</div>
-
-        <audio id="spin-sound" src="spin.mp3"></audio>
-        <audio id="win-sound" src="youwin.mp3"></audio>
     </div>
-
-    <script src="script.js"></script>
+    <div id="win-message">You Win!</div>
+    <script src="game.js"></script>
 </body>
 </html>
