@@ -41,6 +41,10 @@ document.getElementById('burger-menu').addEventListener('click', () => {
         document.getElementById('burger-menu').innerHTML = '☰'; // Change back to burger icon
     }
 });
+function toggleNav() {
+    const navList = document.getElementById('nav-list');
+    navList.classList.toggle('visible');
+}
 
 document.addEventListener('click', (event) => {
     const navMenu = document.getElementById('nav-menu');
