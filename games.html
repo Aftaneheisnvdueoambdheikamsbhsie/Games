@@ -3,68 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Spin Gambar</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-        h1 {
-            color: #333;
-            margin-top: 20px;
-        }
-        #game-board {
-            display: inline-block;
-            margin: 20px auto;
-            background-color: #fff;
-            border: 5px solid #333;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        table {
-            border-spacing: 10px;
-        }
-        td {
-            width: 80px;
-            height: 80px;
-        }
-        img {
-            width: 100%;
-            height: 100%;
-            transition: transform 0.3s ease;
-        }
-        #spin-button {
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        #spin-button:hover {
-            background-color: #45a049;
-        }
-        #score {
-            margin-top: 20px;
-            font-size: 20px;
-        }
-        #spin-button:disabled {
-            background-color: #888;
-            cursor: not-allowed;
-        }
-    </style>
+    <title>winning spin level99.com</title>
+    <link rel="stylesheet" href="game.css">
 </head>
 <body>
     <h1>Game Spin Gambar</h1>
     <div id="game-board">
         <table>
-            <!-- Baris 1 sampai 6 -->
             <tbody id="spin-table">
+                <!-- Baris 1 sampai 6 (dengan id masing-masing sel) -->
                 <!-- Baris 1 -->
                 <tr>
                     <td><img src="Gold coin.png" id="cell-1-1" /></td>
@@ -121,8 +68,7 @@
                     <td><img src="Gold coin.png" id="cell-6-6" /></td>
                     <td><img src="treasure-chest.png" id="cell-6-7" /></td>
                 </tr>
-                <!-- Baris 3 sampai 6 -->
-                <tr><td colspan="7">Matriks lainnya...</td></tr>
+                <!-- Repeat untuk baris lainnya hingga 6 baris -->
             </tbody>
         </table>
         <button id="spin-button">Spin</button>
@@ -131,71 +77,14 @@
     <div id="score">Skor: 0</div>
 
     <audio id="spin-sound" src="spin.mp3"></audio>
-    <audio id="spin-soundd" src="spinning.mp3"></audio>
     <audio id="win-sound" src="youwin.mp3"></audio>
 
-    <script>
-        const images = ['Diamond.png', 'Gold coin.png', 'jackpot.png', 'vip.png', 'luxury.png', 'a.png', 'treasure-chest.png', 'game.png', 'game(1).png'];
-        const rows = 6;
-        const cols = 7;
-        let score = 0;
-
-        // Fungsi untuk memutar spin
-        function spin() {
-            const spinButton = document.getElementById('spin-button');
-            spinButton.disabled = true; // Disable tombol saat spin
-
-            // Play spin sound
-            const spinSound = document.getElementById('spin-sound','spin-soundd');
-            spinSound.play();
-
-            let spinCount = 0;
-            const intervalId = setInterval(() => {
-                if (spinCount >= 10) {
-                    clearInterval(intervalId);
-                    spinButton.disabled = false; // Enable kembali tombol
-                    calculatePrize();
-                    return;
-                }
-
-                for (let r = 1; r <= rows; r++) {
-                    for (let c = 1; c <= cols; c++) {
-                        const randomImage = images[Math.floor(Math.random() * images.length)];
-                        const cell = document.getElementById(`cell-${r}-${c}`);
-                        cell.src = randomImage;
-                        cell.style.transform = 'rotate(360deg)';
-                        setTimeout(() => {
-                            cell.style.transform = 'rotate(0deg)';
-                        }, 300);
-                    }
-                }
-                spinCount++;
-            }, 200);
-        }
-
-        // Fungsi untuk menghitung hadiah
-        function calculatePrize() {
-            let prize = 0;
-            // Misalnya kita menghitung baris pertama sebagai contoh
-            let rowIcons = [];
-            for (let c = 1; c <= cols; c++) {
-                rowIcons.push(document.getElementById(`cell-1-${c}`).src);
-            }
-            // Jika 3 ikon berturut-turut sama
-            if (rowIcons[0] === rowIcons[1] && rowIcons[1] === rowIcons[2]) {
-                prize += 10;  // Tambah hadiah
-            }
-            score += prize;
-            document.getElementById('score').innerText = 'Skor: ' + score;
-
-            // Mainkan efek suara kemenangan jika menang
-            if (prize > 0) {
-                const winSound = document.getElementById('win-sound');
-                winSound.play();
-            }
-        }
-
-        document.getElementById('spin-button').addEventListener('click', spin);
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
+
+
+
+
+
+
