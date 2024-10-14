@@ -1,90 +1,99 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    text-align: center;
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
 }
 
-header {
-    background-color: #333;
-    padding: 10px;
-    color: white;
-    margin-bottom: 20px;
+#logo {
+    width: 50px;
+    height: 50px;
 }
 
 #game-title {
+    font-family: 'Goldman', cursive;
     font-size: 28px;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin: 0;
-    animation: scrolling-title 10s linear infinite;
+    text-align: center;
+    color: gold;
+    animation: marquee 10s linear infinite;
 }
 
-@keyframes scrolling-title {
-    from {
-        margin-left: 100%;
-    }
-    to {
-        margin-left: 0%;
-    }
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
 }
 
-#game-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
+/* Game Board */
 #game-board {
-    margin: 20px;
-    border: 5px solid #000;
+    margin: auto;
+    border: 5px solid gold;
+    padding: 10px;
+    background-color: #222;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+}
+
+/* Spin Controls */
+#spin-controls {
+    margin: 10px 0;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Score Panel */
+#score-panel {
+    margin-top: 20px;
+    background-color: #444;
     padding: 20px;
     border-radius: 10px;
-    background-color: #fff;
-}
-
-table {
-    border-spacing: 10px;
-}
-
-td {
-    width: 80px;
-    height: 80px;
-}
-
-img {
-    width: 100%;
-    height: 100%;
-}
-
-#spin-controls {
-    margin: 20px;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 18px;
-    background-color: #4CAF50;
     color: white;
-    border: none;
-    border-radius: 5px;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+/* Warning Message */
+#warning-message {
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Burger Menu */
+.burger-menu {
+    display: flex;
+    flex-direction: column;
     cursor: pointer;
-    margin: 5px;
 }
 
-button:hover {
-    background-color: #45a049;
+.bar {
+    width: 25px;
+    height: 3px;
+    margin: 4px;
+    background-color: white;
 }
 
-#score-panel {
-    margin: 20px;
-}
-
-h2 {
-    font-size: 24px;
-}
-
-label {
-    margin: 0 10px;
+/* Responsive */
+@media (max-width: 768px) {
+    #game-board {
+        width: 90%;
+    }
 }
