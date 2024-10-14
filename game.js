@@ -13,10 +13,85 @@ document.addEventListener('DOMContentLoaded', function () {
     const multiplierDecreaseButton = document.getElementById('multiplier-decrease');
     const autoSpinButton = document.getElementById('auto-spin-button');
     const autoSpinOptions = document.querySelectorAll('.auto-spin-option');
-
+    const imageValues = {
+    'a.png': 25,
+    'j.png': 25,
+    'gold.png': 30,
+    'coin.png': 30,
+    'game.png': 30,
+    'luxury.png': 50,
+    'diamond.png': 50,
+    'vip.png': 80,
+    'jackpot.png': 80
+};
+    
     let saldo = 1000;
     let currentBet = 200;
     let currentMultiplier = 2;
+    let spinning = false;
+    
+document.getElementById('burger-menu').addEventListener('click', () => {
+    const navMenu = document.getElementById('nav-menu');
+    navMenu.classList.toggle('visible'); // Toggle visibility class
+
+    // Optional: Change burger menu icon to "X" when the menu is open
+    if (navMenu.classList.contains('visible')) {
+        document.getElementById('burger-menu').innerHTML = '✖'; // Change to X icon
+    } else {
+        document.getElementById('burger-menu').innerHTML = '☰'; // Change back to burger icon
+    }
+});
+
+document.addEventListener('click', (event) => {
+    const navMenu = document.getElementById('nav-menu');
+    const burgerMenu = document.getElementById('burger-menu');
+
+    if (!navMenu.contains(event.target) && !burgerMenu.contains(event.target)) {
+        navMenu.classList.remove('visible');
+        burgerMenu.innerHTML = '☰'; // Reset to burger icon
+    }
+});
+    
+// fungsi untuk menu utama game gambar dll
+function calculateScore(matches, betAmount) {
+    let score = 0;
+    matches.forEach(image => {
+        if (imageValues[image]) {
+            score += imageValues[image];
+        }
+    });
+    return score * betAmount; // Total score based on matches and bet
+}
+
+document.getElementById('spin-button').addEventListener('click', () => {
+    if (!spinning) {
+        spinning = true;
+        spinColumns();
+    }
+});
+
+function spinColumns() {
+    const columns = document.querySelectorAll('.column'); // Select your column elements
+    columns.forEach((column, index) => {
+        setTimeout(() => {
+            // Add your rolling logic here
+            column.classList.add('rolling'); // Add CSS class for animation
+        }, index * 300); // Staggered timing
+    });
+    // Stop after a set time
+    setTimeout(stopSpin, 3000); // Adjust duration as necessary
+}
+
+function stopSpin() {
+    spinning = false;
+    // Logic to stop the rolling
+    const columns = document.querySelectorAll('.column');
+    columns.forEach(column => {
+        column.classList.remove('rolling');
+        // Calculate results here
+    });
+}
+
 
     // Update score display
     function updateSaldoDisplay() {
@@ -82,6 +157,27 @@ document.addEventListener('DOMContentLoaded', function () {
             winMessage.style.display = 'none';
         }, 2000);
     }
+    function checkWinningCondition(results) {
+    const matches = {};
+    results.forEach(result => {
+        matches[result] = (matches[result] || 0) + 1;
+    });
+    return Object.keys(matches).filter(key => matches[key] >= 3); // Returns winning images
+}
+function checkJackpotVIP(results) {
+    const isJackpot = results.includes('jackpot.png') && results.includes('vip.png');
+    return isJackpot; // Customize based on your criteria
+}
+function simulateGameOutcome() {
+    const outcome = Math.random();
+    if (outcome < 0.3) {
+        return 'loss'; // 30% chance of loss
+    } else if (outcome < 0.6) {
+        return 'win'; // 30% chance of a small win
+    } else {
+        return 'jackpot'; // 40% chance of jackpot
+    }
+}
 
     // Betting controls
     betIncreaseButton.addEventListener('click', () => {
