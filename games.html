@@ -8,8 +8,8 @@
 </head>
 <body>
     <header>
-        <div class="logo"> 
-            <img src="AdM.webp" alt="Logo" id="logo"> 
+        <div class="logo">
+            <img src="AdM.webp" alt="Logo" id="logo">
         </div>
         <div class="burger-menu" id="burger-menu">
             <div class="bar"></div>
@@ -32,6 +32,7 @@
         <div id="game-board">
             <table>
                 <tbody id="spin-table">
+                    <!-- Game grid layout remains the same -->
                     <tr>
                         <td><img src="coin.png" id="cell-1-1" /></td>
                         <td><img src="Diamond.png" id="cell-1-2" /></td>
@@ -86,36 +87,43 @@
                         <td><img src="coin.png" id="cell-6-6" /></td>
                         <td><img src="treasure-chest.png" id="cell-6-7" /></td>
                     </tr>
+                    <!-- More rows here... -->
                 </tbody>
             </table>
         </div>
 
-        <div id="spin-controls">
-            <button id="spin-button">Spin</button>
-            <div class="dropdown">
-                <button id="auto-spin-button">Auto Spin</button>
-                <div class="dropdown-content hidden">
-                    <button class="auto-spin-option">10x</button>
-                    <button class="auto-spin-option">50x</button>
-                    <button class="auto-spin-option">100x</button>
+        <div id="controls-panel">
+            <div class="bet-controls">
+                <label for="bet-amount">Taruhan:</label>
+                <button id="bet-decrease">-</button>
+                <input type="text" id="bet-amount" value="200" readonly>
+                <button id="bet-increase">+</button>
+            </div>
+
+            <div class="multiplier-controls">
+                <label for="multiplier">Perkalian:</label>
+                <button id="multiplier-decrease">-</button>
+                <input type="text" id="multiplier" value="2" readonly>
+                <button id="multiplier-increase">+</button>
+            </div>
+            
+            <!-- Spin buttons are aligned as requested -->
+            <div class="spin-controls">
+                <button id="spin-button">Spin</button>
+                <div class="dropdown">
+                    <button id="auto-spin-button">Auto Spin</button>
+                    <div class="dropdown-content hidden">
+                        <button class="auto-spin-option">10x</button>
+                        <button class="auto-spin-option">20x</button>
+                        <button class="auto-spin-option">50x</button>
+                        <button class="auto-spin-option">100x</button>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div id="score-panel">
             <h2>Saldo: <span id="score">Rp 1000.00</span></h2>
-            <label for="bet-amount">Taruhan: </label>
-            <div class="bet-controls">
-                <button id="bet-decrease">-</button>
-                <input type="text" id="bet-amount" value="200" readonly>
-                <button id="bet-increase">+</button>
-            </div>
-            <label for="multiplier">Perkalian: </label>
-            <div class="multiplier-controls">
-                <button id="multiplier-decrease">-</button>
-                <input type="text" id="multiplier" value="2" readonly>
-                <button id="multiplier-increase">+</button>
-            </div>
         </div>
 
         <div id="warning-message" class="hidden">Anda tidak punya saldo lagi untuk bermain!</div>
