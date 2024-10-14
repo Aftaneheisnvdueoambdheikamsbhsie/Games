@@ -1,88 +1,79 @@
-const images = ['Diamond.png', 'Gold coin.png', 'jackpot.png', 'vip.png', 'luxury.png', 'a.png', 'treasure-chest.png', 'game.png'];
+const images = ['Diamond.png', 'coin.png', 'jackpot.png', 'vip.png', 'luxury.png', 'a.png', 'treasure-chest.png', 'game.png'];
 const rows = 6;
 const cols = 7;
-let score = 0;
-
-// Skor untuk setiap ikon
-const iconScores = {
-    'jackpot.png': 2,
-    'Diamond.png': 1,
-    'Gold coin.png': 1,
-    'luxury.png': 1.5,
-    'a.png': 1,
-    'j.png': 1,
-    'game.png': 1,
-    'treasure-chest.png': 1
-};
+let score = 1000.00; // Mulai dengan modal Rp 1000.00
+let autoSpinCount = 0;
+let spinInterval;
 
 // Fungsi untuk memutar spin
 function spin() {
-    const spinButton = document.getElementById('spin-button');
-    spinButton.disabled = true; // Disable tombol saat spin
+    const betAmount = parseFloat(document.getElementById('bet-amount').value);
+    const multiplier = parseFloat(document.getElementById('multiplier').value);
+    if (score >= betAmount) {
+        score -= betAmount; // Kurangi saldo dengan taruhan
+        updateScore();
 
-    const spinSound = document.getElementById('spin-sound');
-    spinSound.play();
+        // Play spin sound
+        const spinSound = document.getElementById('spin-sound');
+        spinSound.play();
 
-    let spinCount = 0;
-    const intervalId = setInterval(() => {
-        if (spinCount >= 10) {
-            clearInterval(intervalId);
-            spinButton.disabled = false; // Enable tombol setelah spin selesai
-            calculatePrize();
-            return;
-        }
-
-        for (let r = 1; r <= rows; r++) {
-            for (let c = 1; c <= cols; c++) {
-                const randomImage = images[Math.floor(Math.random() * images.length)];
-                const cell = document.getElementById(`cell-${r}-${c}`);
-                
-                // Gambar akan "jatuh" dari atas ke bawah
-                cell.style.transform = 'translateY(-100px)';
-                cell.style.opacity = '0';
-                setTimeout(() => {
-                    cell.src = randomImage;
-                    cell.style.transform = 'translateY(0)';
-                    cell.style.opacity = '1';
-                }, 300);
+        let spinCount = 0;
+        const intervalId = setInterval(() => {
+            if (spinCount >= 10) {
+                clearInterval(intervalId);
+                calculatePrize(multiplier);
+                return;
             }
-        }
-        spinCount++;
-    }, 200);
+            for (let r = 1; r <= rows; r++) {
+                for (let c = 1; c <= cols; c++) {
+                    const randomImage = images[Math.floor(Math.random() * images.length)];
+                    const cell = document.getElementById(`cell-${r}-${c}`);
+                    cell.src = randomImage;
+                }
+            }
+            spinCount++;
+        }, 200);
+    } else {
+        alert("Saldo tidak cukup!");
+    }
 }
 
 // Fungsi untuk menghitung hadiah
-function calculatePrize() {
+function calculatePrize(multiplier) {
     let prize = 0;
-    const checkedRows = []; // Untuk mengecek jika ada 3 ikon berturut-turut yang sama
-
-    for (let r = 1; r <= rows; r++) {
-        let rowIcons = [];
-        for (let c = 1; c <= cols; c++) {
-            rowIcons.push(document.getElementById(`cell-${r}-${c}`).src.split('/').pop());
-        }
-
-        // Mengecek apakah ada 3 ikon yang sama berturut-turut
-        for (let i = 0; i <= cols - 3; i++) {
-            if (rowIcons[i] === rowIcons[i + 1] && rowIcons[i] === rowIcons[i + 2]) {
-                prize += iconScores[rowIcons[i]] * 3; // Poin untuk 3 ikon berturut-turut
-            }
-        }
-
-        // Menambah poin untuk setiap ikon di baris
-        for (const icon of rowIcons) {
-            prize += iconScores[icon] || 0;
-        }
-    }
-
+    // Logika untuk menghitung kemenangan di sini (misal 3 ikon sama)
+    // Contoh:
+    // Jika 3 ikon 'jackpot' dalam satu baris, menangkan hadiah
+    prize = 200 * multiplier; // Contoh hadiah berdasarkan multiplier
     score += prize;
-    document.getElementById('score').innerText = 'Skor: ' + score;
+    updateScore();
 
-    // Mainkan suara jika ada hadiah
     if (prize > 0) {
         const winSound = document.getElementById('win-sound');
         winSound.play();
     }
 }
 
+// Fungsi untuk memperbarui tampilan saldo
+function updateScore() {
+    document.getElementById('score').innerText = `Rp ${score.toFixed(2)}`;
+}
+
+// Spin otomatis
+function autoSpin(times) {
+    autoSpinCount = times;
+    spinInterval = setInterval(() => {
+        if (autoSpinCount <= 0) {
+            clearInterval(spinInterval);
+            return;
+        }
+        spin();
+        autoSpinCount--;
+    }, 1500);
+}
+
+// Event listeners
 document.getElementById('spin-button').addEventListener('click', spin);
+document.getElementById('auto-spin-10').addEventListener('click', () => autoSpin(10));
+document.getElementById('auto-spin-50').addEventListener('click', () => autoSpin(50));
+document.getElementById('auto-spin-100').addEventListener('click', () => autoSpin(100));
