@@ -42,7 +42,6 @@ nav ul.visible {
     right: 10px;
     top: 50px;
     padding: 10px;
-    border-radius: 10px;
 }
 
 .logo img {
@@ -194,6 +193,12 @@ button:hover {
     #spin-controls {
         flex-direction: column;
         align-items: center;
+        width: 100%; /* Full width */
+    }
+
+    .bet-controls, .multiplier-controls {
+        width: 100%; /* Full width */
+        justify-content: center; /* Center align */
     }
 
     button {
@@ -215,5 +220,24 @@ button:hover {
 
     .burger-menu {
         margin-right: 20px; /* Spacing for mobile */
+    }
+
+    #game-board table img {
+        width: 80px; /* Adjust image size for mobile */
+        height: 80px;
+    }
+}
+
+@media (max-width: 400px) {
+    button {
+        font-size: 14px; /* Smaller font size for very small screens */
+    }
+
+    .bet-controls input, .multiplier-controls input {
+        width: 80px; /* Adjust input size for very small screens */
+    }
+
+    #win-message {
+        font-size: 24px; /* Further reduce win message size */
     }
 }
