@@ -39,6 +39,7 @@ header {
     opacity: 1; /* Mengubah opacity menjadi 1 saat tampil */
     transform: translate(-50%, -50%) scale(1.2); /* Membesarkan efek */
 }
+
 .burger-menu {
     cursor: pointer;
     display: flex;
@@ -64,6 +65,8 @@ nav {
     position: absolute;
     width: 200px;
     display: none;
+    top: 100%; /* Posisi di bawah header */
+    left: 0; /* Rata kiri */
 }
 
 nav ul {
@@ -91,6 +94,13 @@ nav.hidden {
 
 #game-board {
     margin: 20px auto;
+    position: relative; /* Agar posisi spin table relatif */
+}
+
+.spin-table img {
+    width: 100px; /* Ukuran gambar */
+    height: auto; /* Menjaga aspek rasio */
+    transition: transform 0.3s; /* Animasi saat gambar diperbarui */
 }
 
 #spin-controls {
@@ -156,4 +166,33 @@ input[type="text"] {
 #warning-message {
     color: red;
     margin-top: 10px;
+}
+
+/* Animasi saat gambar spin */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Style tambahan untuk tampilan responsif */
+@media (max-width: 600px) {
+    #spin-button,
+    #auto-spin-button {
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+    
+    .bet-controls,
+    .multiplier-controls {
+        flex-direction: column; /* Tumpuk vertikal */
+    }
+    
+    input[type="text"] {
+        width: 100%; /* Lebar penuh pada perangkat kecil */
+        margin: 5px 0; /* Margin vertikal */
+    }
 }
