@@ -14,7 +14,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const multiplierDecreaseButton = document.getElementById('multiplier-decrease');
     const autoSpinButton = document.getElementById('auto-spin-button');
     const autoSpinOptions = document.querySelectorAll('.auto-spin-option');
-
+    const betValues = [
+    0, 200, 500, 1000, 2000, 5000, 10000, 20000, 25000, 50000, 
+    100000, 500000, 750000, 1000000, 1500000, 2000000, 
+    2500000, 3000000, 5000000, 10000000
+    ];
     const imageValues = {
         'a.png': 25,
         'j.png': 25,
