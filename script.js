@@ -1,111 +1,121 @@
-// Initialize score and bets
-let score = 1000;
-let betAmount = 0;
-let multiplier = 2;
-const scoreDisplay = document.getElementById('score');
-const betValueDisplay = document.getElementById('bet-value');
-const multiplierValueDisplay = document.getElementById('multiplier-value');
-const spinButton = document.getElementById('spin-button');
-const warningMessage = document.getElementById('warning-message');
-const spinSound = document.getElementById('spin-sound');
-const winSound = document.getElementById('win-sound');
+document.addEventListener('DOMContentLoaded', () => {
+    const burgerMenu = document.getElementById('burger-menu');
+    const gameMenu = document.getElementById('game-menu');
+    const spinButton = document.getElementById('spin-button');
+    const betAmountInput = document.getElementById('bet-amount');
+    const multiplierInput = document.getElementById('multiplier');
+    const betIncreaseButton = document.getElementById('bet-increase');
+    const betDecreaseButton = document.getElementById('bet-decrease');
+    const multiplierIncreaseButton = document.getElementById('multiplier-increase');
+    const multiplierDecreaseButton = document.getElementById('multiplier-decrease');
+    const spinSound = document.getElementById('spin-sound');
+    const winSound = document.getElementById('win-sound');
+    const warningMessage = document.getElementById('warning-message');
 
-// Update displays
-function updateDisplays() {
-    scoreDisplay.innerText = `Rp ${score.toLocaleString()}`;
-    betValueDisplay.innerText = `Rp ${betAmount.toLocaleString()}`;
-    multiplierValueDisplay.innerText = `${multiplier}x`;
-}
-
-// Handle betting controls
-document.getElementById('bet-increase').addEventListener('click', () => {
-    if (betAmount < score) {
-        betAmount += 100; // Increment bet
-        updateDisplays();
-    }
-});
-
-document.getElementById('bet-decrease').addEventListener('click', () => {
-    if (betAmount > 0) {
-        betAmount -= 100; // Decrement bet
-        updateDisplays();
-    }
-});
-
-// Handle multiplier controls
-document.getElementById('multiplier-increase').addEventListener('click', () => {
-    if (multiplier < 10) {
-        multiplier++;
-        updateDisplays();
-    }
-});
-
-document.getElementById('multiplier-decrease').addEventListener('click', () => {
-    if (multiplier > 2) {
-        multiplier--;
-        updateDisplays();
-    }
-});
-
-// Spin function
-spinButton.addEventListener('click', () => {
-    if (score <= 0) {
-        warningMessage.classList.remove('hidden');
-        return;
-    }
-    warningMessage.classList.add('hidden');
-
-    spinSound.play();
-    // Simulate the spin
-    const results = spin(); // Add your logic for spinning results
-    displayResults(results);
-});
-
-// Mock function for spinning results
-function spin() {
-    // Randomly return 3 results from your available symbols
-    const symbols = ["jackpot", "luxury", "coin", "diamond", "a", "j"];
-    const results = [];
-    for (let i = 0; i < 3; i++) {
-        results.push(symbols[Math.floor(Math.random() * symbols.length)]);
-    }
-    return results;
-}
-
-// Display results and handle winnings
-function displayResults(results) {
-    // Logic to determine if the player wins
-    let win = checkWin(results);
-    if (win) {
-        score += betAmount * multiplier;
-        winSound.play();
-        animateWinningCells(results);
-    } else {
-        score -= betAmount;
-    }
-    updateDisplays();
-}
-
-// Check if there's a win
-function checkWin(results) {
-    // Implement your winning logic
-    return results[0] === results[1] && results[1] === results[2]; // Example condition
-}
-
-// Animate winning cells
-function animateWinningCells(results) {
-    results.forEach((result, index) => {
-        const cell = document.getElementById(`cell-1-${index + 1}`);
-        cell.classList.add('win-animation');
-        // Optionally, you can add a timeout to remove the animation class after a duration
-        setTimeout(() => {
-            cell.classList.remove('win-animation');
-        }, 600); // Match the duration of the animation
+    let score = 1000;
+    const maxBet = 10000000;
+    
+    burgerMenu.addEventListener('click', () => {
+        gameMenu.classList.toggle('visible');
     });
-}
 
-// Burger menu functionality
-document.getElementById('burger-menu').addEventListener('click', () => {
-    const nav = document.getElementById('game-menu');
-    nav.classList.toggle('active');
+    betIncreaseButton.addEventListener('click', () => {
+        let currentBet = parseInt(betAmountInput.value);
+        if (currentBet < maxBet) {
+            currentBet += 200; // Adjust increment as needed
+            betAmountInput.value = currentBet;
+        }
+    });
+
+    betDecreaseButton.addEventListener('click', () => {
+        let currentBet = parseInt(betAmountInput.value);
+        if (currentBet > 0) {
+            currentBet -= 200; // Adjust decrement as needed
+            betAmountInput.value = currentBet;
+        }
+    });
+
+    multiplierIncreaseButton.addEventListener('click', () => {
+        let currentMultiplier = parseInt(multiplierInput.value);
+        if (currentMultiplier < 10) {
+            currentMultiplier++;
+            multiplierInput.value = currentMultiplier;
+        }
+    });
+
+    multiplierDecreaseButton.addEventListener('click', () => {
+        let currentMultiplier = parseInt(multiplierInput.value);
+        if (currentMultiplier > 2) {
+            currentMultiplier--;
+            multiplierInput.value = currentMultiplier;
+        }
+    });
+
+    spinButton.addEventListener('click', () => {
+        spinSound.play();
+        // Animation Logic 
+        spinAnimation();
+    });
+
+    function spinAnimation() {
+        const spinTable = document.getElementById('spin-table');
+        let spinCount = 10; // Total number of spins
+        let spinDuration = 300; // Duration of each spin in milliseconds
+        let currentRow = 0;
+        let winningRows = [];
+
+        const spinInterval = setInterval(() => {
+            if (currentRow < spinCount) {
+                spinTable.style.transform = `translateY(-${currentRow * 50}px)`;
+                currentRow++;
+
+                // Check for wins after certain spins
+                if (currentRow === spinCount - 5) {
+                    winningRows = checkForWins();
+                }
+            } else {
+                clearInterval(spinInterval);
+                revealWinnings(winningRows);
+            }
+        }, spinDuration);
+    }
+
+    function checkForWins() {
+        // Logic to check winning rows, assuming rows with matching images are wins
+        const rows = [...document.querySelectorAll('#spin-table tr')];
+        const winningRows = [];
+
+        for (let i = 0; i < rows.length; i++) {
+            const cells = [...rows[i].children];
+            const firstImageSrc = cells[0].querySelector('img').src;
+
+            // Check if all images in the row are the same
+            if (cells.every(cell => cell.querySelector('img').src === firstImageSrc)) {
+                winningRows.push(i);
+            }
+        }
+        return winningRows;
+    }
+
+    function revealWinnings(winningRows) {
+        winningRows.forEach(rowIndex => {
+            const row = document.querySelector(`#spin-table tr:nth-child(${rowIndex + 1})`);
+            row.classList.add('winning-row');
+
+            // Add win animation (e.g., spin effect)
+            const images = row.querySelectorAll('img');
+            images.forEach(img => {
+                img.classList.add('spin-animation');
+                img.addEventListener('animationend', () => {
+                    img.classList.remove('spin-animation');
+                });
+            });
+        });
+
+        // Sound effects for wins
+        if (winningRows.length > 0) {
+            winSound.play();
+            alert('You have won!');
+        }
+    }
 });
