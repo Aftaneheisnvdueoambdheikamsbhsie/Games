@@ -22,10 +22,38 @@ header {
     position: relative;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; /* Align items to the left */
     padding: 10px 20px;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 1;
+}
+
+.logo img {
+    width: 60px; 
+    height: auto;
+}
+
+#game-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: gold;
+    margin-left: 10px; /* Space between logo and title */
+}
+
+.burger-menu {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px; /* Spacing for the burger menu */
+}
+
+.burger-menu .bar {
+    width: 30px;
+    height: 4px;
+    background-color: #fff;
+    margin: 5px 0;
 }
 
 nav ul {
@@ -42,32 +70,7 @@ nav ul.visible {
     right: 10px;
     top: 50px;
     padding: 10px;
-}
-
-.logo img {
-    width: 60px; 
-    height: auto;
-}
-
-#game-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: gold;
-}
-
-.burger-menu {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.burger-menu .bar {
-    width: 30px;
-    height: 4px;
-    background-color: #fff;
-    margin: 5px 0;
+    border-radius: 10px;
 }
 
 #game-container {
@@ -81,9 +84,13 @@ nav ul.visible {
 }
 
 /* Game Table */
-#game-board table {
+#game-board {
     width: 100%;
     margin-bottom: 20px;
+}
+
+#game-board table {
+    width: 100%;
     border-spacing: 5px;
 }
 
@@ -187,18 +194,12 @@ button:hover {
 @media (max-width: 600px) {
     header {
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start; /* Align items to the left */
     }
 
     #spin-controls {
         flex-direction: column;
         align-items: center;
-        width: 100%; /* Full width */
-    }
-
-    .bet-controls, .multiplier-controls {
-        width: 100%; /* Full width */
-        justify-content: center; /* Center align */
     }
 
     button {
@@ -220,24 +221,5 @@ button:hover {
 
     .burger-menu {
         margin-right: 20px; /* Spacing for mobile */
-    }
-
-    #game-board table img {
-        width: 80px; /* Adjust image size for mobile */
-        height: 80px;
-    }
-}
-
-@media (max-width: 400px) {
-    button {
-        font-size: 14px; /* Smaller font size for very small screens */
-    }
-
-    .bet-controls input, .multiplier-controls input {
-        width: 80px; /* Adjust input size for very small screens */
-    }
-
-    #win-message {
-        font-size: 24px; /* Further reduce win message size */
     }
 }
