@@ -30,7 +30,7 @@ header {
 
 nav ul {
     list-style: none;
-    display: none;
+    display: none; /* Hidden by default */
     padding: 0;
 }
 
@@ -58,6 +58,10 @@ nav ul.visible {
 
 .burger-menu {
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .burger-menu .bar {
@@ -116,11 +120,7 @@ button:hover {
     background-color: darkgoldenrod;
 }
 
-#spin-button {
-    width: 150px;
-}
-
-#auto-spin-button {
+#spin-button, #auto-spin-button {
     width: 150px;
     position: relative;
 }
@@ -202,5 +202,18 @@ button:hover {
 
     #win-message {
         font-size: 30px;
+    }
+
+    nav ul {
+        width: 100%; /* Full width on mobile */
+        right: 0; /* Align to the right */
+    }
+
+    nav ul.visible {
+        padding: 10px; /* Add padding for mobile */
+    }
+
+    .burger-menu {
+        margin-right: 20px; /* Spacing for mobile */
     }
 }
