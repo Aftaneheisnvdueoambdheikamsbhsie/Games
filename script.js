@@ -1,164 +1,161 @@
 document.addEventListener('DOMContentLoaded', () => {
     const spinButton = document.getElementById('spin-button');
     const autoSpinButton = document.getElementById('auto-spin-button');
-    const dropdownContent = document.querySelector('.dropdown-content');
-    const betIncreaseButton = document.getElementById('bet-increase');
-    const betDecreaseButton = document.getElementById('bet-decrease');
-    const multiplierIncreaseButton = document.getElementById('multiplier-increase');
-    const multiplierDecreaseButton = document.getElementById('multiplier-decrease');
+    const autoSpinOptions = document.querySelectorAll('.auto-spin-option');
+    const betIncrease = document.getElementById('bet-increase');
+    const betDecrease = document.getElementById('bet-decrease');
     const betAmountInput = document.getElementById('bet-amount');
+    const multiplierIncrease = document.getElementById('multiplier-increase');
+    const multiplierDecrease = document.getElementById('multiplier-decrease');
     const multiplierInput = document.getElementById('multiplier');
-    const scoreElement = document.getElementById('score');
-    const warningMessage = document.getElementById('warning-message');
+    const spinTable = document.getElementById('spin-table');
     const spinSound = document.getElementById('spin-sound');
     const winSound = document.getElementById('win-sound');
-    const spinTable = document.getElementById('spin-table');
+    let isAutoSpinning = false;
+    let autoSpinInterval;
+    const predefinedBetValues = [200, 500, 1000, 5000, 10000, 20000, 25000, 50000, 100000, 500000, 1000000, 1500000, 2000000, 2500000, 3000000, 5000000, 10000000];
+    const predefinedMultiplierValues = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-    let score = 1000; // Initial score
-    let currentBet = 200; // Default bet amount
-    let currentMultiplier = 2; // Default multiplier
-    let autoSpinInterval; // For automatic spins
-
-    // Bet values array
-    const betValues = [200, 500, 1000, 5000, 10000, 20000, 25000, 50000, 100000, 500000, 1000000, 1500000, 2000000, 2500000, 3000000, 5000000, 10000000];
-
-    // Initialize the input values
-    betAmountInput.value = currentBet;
-    multiplierInput.value = currentMultiplier;
-
-    // Toggle burger menu
-    document.getElementById('burger-menu').addEventListener('click', () => {
-        const menu = document.getElementById('game-menu');
-        menu.classList.toggle('hidden');
-    });
-
-    // Spin button click event
+    // Spin Logic
     spinButton.addEventListener('click', () => {
-        if (score >= currentBet) {
-            score -= currentBet; // Deduct the bet amount from score
-            scoreElement.innerText = `Rp ${score.toFixed(2)}`; // Update the score display
-            warningMessage.classList.add('hidden'); // Hide warning message
-            startSpinningAnimation(); // Start spinning animation
-        } else {
-            warningMessage.classList.remove('hidden'); // Show warning if insufficient score
-        }
+        startSpin();
     });
 
-    // Auto Spin dropdown toggle
+    function startSpin() {
+        // Play spin sound
+        spinSound.currentTime = 0;
+        spinSound.play();
+
+        // Animate the table
+        let spinDuration = 3000; // 3 seconds
+        animateSpin(spinDuration);
+        
+        // Stop sound when spin ends
+        setTimeout(() => {
+            spinSound.pause();
+        }, spinDuration);
+    }
+
+    function animateSpin(duration) {
+        // Placeholder spin animation logic
+        // Add actual animation logic to randomize the images
+        spinTable.classList.add('spinning'); // CSS class to handle animation
+
+        setTimeout(() => {
+            spinTable.classList.remove('spinning');
+            checkForJackpot();
+        }, duration);
+    }
+
+    // Auto Spin Logic
     autoSpinButton.addEventListener('click', () => {
-        dropdownContent.classList.toggle('hidden');
+        toggleAutoSpinMenu();
     });
 
-    // Auto Spin options
-    document.querySelectorAll('.auto-spin-option').forEach(option => {
-        option.addEventListener('click', (e) => {
-            const spins = parseInt(e.target.innerText);
-            startAutoSpin(spins); // Start auto spin logic
-            dropdownContent.classList.add('hidden'); // Hide dropdown after selection
+    autoSpinOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const spinCount = parseInt(option.textContent.replace('x', ''));
+            startAutoSpin(spinCount);
         });
     });
 
-    // Bet increase and decrease buttons
-    betIncreaseButton.addEventListener('click', () => {
-        const nextBet = betValues.find(value => value > currentBet);
-        if (nextBet) {
-            currentBet = nextBet;
-            betAmountInput.value = currentBet;
-        }
-    });
-
-    betDecreaseButton.addEventListener('click', () => {
-        const previousBet = betValues.reverse().find(value => value < currentBet);
-        if (previousBet) {
-            currentBet = previousBet;
-            betAmountInput.value = currentBet;
-        }
-    });
-
-    // Multiplier increase and decrease buttons
-    multiplierIncreaseButton.addEventListener('click', () => {
-        if (currentMultiplier < 10) { // Set a max limit for multiplier
-            currentMultiplier++;
-            multiplierInput.value = currentMultiplier;
-        }
-    });
-
-    multiplierDecreaseButton.addEventListener('click', () => {
-        if (currentMultiplier > 1) { // Set a min limit for multiplier
-            currentMultiplier--;
-            multiplierInput.value = currentMultiplier;
-        }
-    });
-
-    function startSpinningAnimation() {
-        spinSound.currentTime = 0; // Reset sound to start
-        spinSound.play(); // Play spin sound
-        let spinDuration = 3000; // Spin duration in milliseconds
-        let spinFrames = 6; // Number of frames to display during spin
-        let currentFrame = 0;
-        
-        // Spin animation loop
-        const spinInterval = setInterval(() => {
-            // Update the spin table to simulate spinning
-            updateSpinTable();
-            currentFrame++;
-            if (currentFrame >= spinFrames) {
-                clearInterval(spinInterval);
-                checkWinCondition(); // Check for winning after spin
-            }
-        }, spinDuration / spinFrames);
+    function toggleAutoSpinMenu() {
+        const dropdown = autoSpinButton.nextElementSibling;
+        dropdown.classList.toggle('hidden');
     }
 
-    function updateSpinTable() {
-    // Logic to update the spin table (e.g., randomize the images)
-    const cells = spinTable.querySelectorAll('img');
-    cells.forEach(cell => {
-        const randomImageIndex = Math.floor(Math.random() * 10); // Randomize images (assuming 10 images)
-        cell.src = `image_${randomImageIndex}.png`; // Update the image source
-        cell.style.animation = 'spin 0.3s linear'; // Menambahkan animasi spin pada gambar
-    });
-}
+    function startAutoSpin(count) {
+        if (isAutoSpinning) return;
 
+        isAutoSpinning = true;
+        let spins = 0;
 
-    function checkWinCondition() {
-        // Logic to check if the player won (placeholder logic)
-        const isWinner = Math.random() < 0.5; // Randomly determine if the player wins
-        if (isWinner) {
-            winSound.play(); // Play win sound
-            score += currentBet * currentMultiplier; // Calculate winnings
-            scoreElement.innerText = `Rp ${score.toFixed(2)}`; // Update score display
-            displayWinningAnimation(); // Show winning animation
-        } else {
-            // Handle losing scenario (you can add effects or messages here)
-        }
-    }
-
-    function displayWinningAnimation() {
-        const winningEffect = document.createElement('div');
-        winningEffect.classList.add('winning-effect');
-        winningEffect.innerText = "You Win!";
-        document.body.appendChild(winningEffect); // Menambahkan efek ke body
-
-        // Mengatur animasi
-        setTimeout(() => {
-            winningEffect.classList.add('show'); // Menambahkan kelas show untuk memulai animasi
-        }, 100); // Menunggu sedikit untuk memberikan efek
-
-        // Menghapus efek setelah animasi selesai
-        setTimeout(() => {
-            document.body.removeChild(winningEffect);
-        }, 3000); // Menghapus efek setelah 3 detik
-    }
-
-    function startAutoSpin(spins) {
-        let spinCount = spins; // Set the number of spins
         autoSpinInterval = setInterval(() => {
-            if (spinCount > 0) {
-                spinButton.click(); // Trigger spin
-                spinCount--;
-            } else {
-                clearInterval(autoSpinInterval); // Stop auto spinning
+            startSpin();
+            spins++;
+
+            if (spins >= count) {
+                clearInterval(autoSpinInterval);
+                isAutoSpinning = false;
             }
-        }, 4000); // Set the interval for each spin (adjust as needed)
+        }, 4000); // 4 seconds per spin
+    }
+
+    // Betting Logic
+    betIncrease.addEventListener('click', () => {
+        adjustBetAmount(1);
+    });
+
+    betDecrease.addEventListener('click', () => {
+        adjustBetAmount(-1);
+    });
+
+    function adjustBetAmount(direction) {
+        const currentBet = parseInt(betAmountInput.value);
+        const currentIndex = predefinedBetValues.indexOf(currentBet);
+        const newIndex = currentIndex + direction;
+
+        if (newIndex >= 0 && newIndex < predefinedBetValues.length) {
+            betAmountInput.value = predefinedBetValues[newIndex];
+        }
+    }
+
+    multiplierIncrease.addEventListener('click', () => {
+        adjustMultiplier(1);
+    });
+
+    multiplierDecrease.addEventListener('click', () => {
+        adjustMultiplier(-1);
+    });
+
+    function adjustMultiplier(direction) {
+        const currentMultiplier = parseInt(multiplierInput.value);
+        const currentIndex = predefinedMultiplierValues.indexOf(currentMultiplier);
+        const newIndex = currentIndex + direction;
+
+        if (newIndex >= 0 && newIndex < predefinedMultiplierValues.length) {
+            multiplierInput.value = predefinedMultiplierValues[newIndex];
+        }
+    }
+
+    // Jackpot Animation
+    function checkForJackpot() {
+        const jackpotImages = ['jackpot.png']; // Add more jackpot identifiers if needed
+        const cells = Array.from(spinTable.getElementsByTagName('img'));
+        let jackpotCells = [];
+
+        cells.forEach(cell => {
+            if (jackpotImages.includes(cell.src.split('/').pop())) {
+                jackpotCells.push(cell);
+            }
+        });
+
+        if (jackpotCells.length >= 3) {
+            triggerJackpotAnimation(jackpotCells);
+        }
+    }
+
+    function triggerJackpotAnimation(jackpotCells) {
+        jackpotCells.forEach(cell => {
+            cell.classList.add('jackpot-animate'); // Apply CSS animation
+        });
+
+        setTimeout(() => {
+            jackpotCells.forEach(cell => {
+                cell.classList.remove('jackpot-animate');
+            });
+            awardFreeSpins();
+        }, 3000); // 3 seconds of jackpot animation
+    }
+
+    function awardFreeSpins() {
+        let freeSpins = 6;
+        startAutoSpin(freeSpins);
+    }
+
+    // Stop all spin sounds when auto spin ends
+    function stopAllSounds() {
+        spinSound.pause();
+        winSound.pause();
     }
 });
