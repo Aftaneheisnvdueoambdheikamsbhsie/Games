@@ -87,11 +87,11 @@
                         <td><img src="coin.png" id="cell-6-6" /></td>
                         <td><img src="treasure-chest.png" id="cell-6-7" /></td>
                     </tr>
+                
                 </tbody>
             </table>
         </div>
 
-        <!-- Tombol Spin -->
         <div id="spin-controls">
             <button id="spin-button">Spin</button>
             <div class="dropdown">
@@ -104,27 +104,24 @@
             </div>
         </div>
 
-        <!-- Pengaturan Score dan Multiplier -->
         <div id="score-panel">
             <h2>Saldo: <span id="score">Rp 1000.00</span></h2>
             <label for="bet-amount">Taruhan: </label>
-            <div id="bet-controls">
+            <div class="bet-controls">
                 <button id="bet-decrease">-</button>
-                <span id="bet-value">Rp 0</span>
+                <input type="text" id="bet-amount" value="0" readonly>
                 <button id="bet-increase">+</button>
             </div>
             <label for="multiplier">Perkalian: </label>
-            <div id="multiplier-controls">
+            <div class="multiplier-controls">
                 <button id="multiplier-decrease">-</button>
-                <span id="multiplier-value">2x</span>
+                <input type="text" id="multiplier" value="2" readonly>
                 <button id="multiplier-increase">+</button>
             </div>
         </div>
 
-        <!-- Pesan peringatan saat skor nol -->
         <div id="warning-message" class="hidden">Anda tidak punya skor lagi untuk bermain!</div>
 
-        <!-- Audio -->
         <audio id="spin-sound" src="spin.mp3"></audio>
         <audio id="win-sound" src="youwin.mp3"></audio>
     </div>
@@ -132,3 +129,5 @@
     <script src="script.js"></script>
 </body>
 </html>
+
+                    
