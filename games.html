@@ -130,8 +130,9 @@
 
     <div id="score">Skor: 0</div>
 
-    <audio id="spin-sound" src="spin-sound.mp3"></audio>
-    <audio id="win-sound" src="win-sound.mp3"></audio>
+    <audio id="spin-sound" src="spin.mp3"></audio>
+    <audio id="spin-soundd" src="spinning.mp3"></audio>
+    <audio id="win-sound" src="youwin.mp3"></audio>
 
     <script>
         const images = ['icon1.png', 'icon2.png', 'icon3.png', 'icon4.png', 'icon5.png'];
@@ -145,7 +146,7 @@
             spinButton.disabled = true; // Disable tombol saat spin
 
             // Play spin sound
-            const spinSound = document.getElementById('spin-sound');
+            const spinSound = document.getElementById('spin-sound','spin-soundd');
             spinSound.play();
 
             let spinCount = 0;
