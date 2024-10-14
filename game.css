@@ -1,99 +1,207 @@
-/* Header */
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header styles */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
+    background-color: #222;
+    color: white;
+    padding: 10px 20px;
+    width: 100%;
 }
 
-#logo {
-    width: 50px;
+.logo img {
     height: 50px;
 }
 
 #game-title {
-    font-family: 'Goldman', cursive;
-    font-size: 28px;
-    text-align: center;
-    color: gold;
-    animation: marquee 10s linear infinite;
+    font-size: 24px;
 }
 
-@keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
+/* Burger menu styles */
+.burger-menu {
+    cursor: pointer;
 }
 
-/* Game Board */
+.burger-menu .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+}
+
+/* Navigation menu styles */
+#game-menu {
+    position: fixed;
+    left: -250px; /* Hidden by default */
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    transition: left 0.3s ease;
+    z-index: 10;
+}
+
+#game-menu.active {
+    left: 0; /* Show menu */
+}
+
+#game-menu ul {
+    list-style-type: none;
+    padding: 20px 0;
+}
+
+#game-menu li {
+    padding: 15px 20px;
+}
+
+#game-menu a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Game container styles */
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Game board styles */
 #game-board {
-    margin: auto;
-    border: 5px solid gold;
-    padding: 10px;
-    background-color: #222;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+    margin: 20px 0;
 }
 
-/* Spin Controls */
+#spin-table {
+    border-collapse: collapse;
+}
+
+#spin-table td {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#spin-table img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Spin controls styles */
 #spin-controls {
-    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#spin-button {
+    background-color: #ffcc00;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#spin-button:hover {
+    background-color: #ffd700;
+}
+
+.dropdown {
+    position: relative;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #333;
     min-width: 100px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Score Panel */
-#score-panel {
-    margin-top: 20px;
-    background-color: #444;
-    padding: 20px;
-    border-radius: 10px;
+.dropdown-content button {
     color: white;
-}
-
-input[type="range"] {
+    padding: 10px;
+    text-align: left;
+    background-color: #444;
+    border: none;
     width: 100%;
+    cursor: pointer;
 }
 
-/* Warning Message */
-#warning-message {
-    color: red;
-    text-align: center;
+.dropdown-content button:hover {
+    background-color: #555;
+}
+
+/* Score panel styles */
+#score-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 20px;
+}
+
+#score-panel h2 {
+    margin-bottom: 10px;
+}
+
+#bet-controls, #multiplier-controls {
+    display: flex;
+    align-items: center;
+}
+
+#bet-controls button, #multiplier-controls button {
+    background-color: #ffcc00;
+    border: none;
+    color: black;
+    padding: 10px;
+    cursor: pointer;
+    margin: 0 5px;
 }
 
 .hidden {
     display: none;
 }
 
-/* Burger Menu */
-.burger-menu {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
+/* Animation for winning images */
+.win-animation {
+    animation: rotate 0.6s forwards;
 }
 
-.bar {
-    width: 25px;
-    height: 3px;
-    margin: 4px;
-    background-color: white;
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-/* Responsive */
+/* Media queries for responsive design */
 @media (max-width: 768px) {
-    #game-board {
-        width: 90%;
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #game-menu {
+        width: 100%;
     }
 }
