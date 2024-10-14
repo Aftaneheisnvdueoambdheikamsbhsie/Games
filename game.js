@@ -14,25 +14,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const multiplierDecreaseButton = document.getElementById('multiplier-decrease');
     const autoSpinButton = document.getElementById('auto-spin-button');
     const autoSpinOptions = document.querySelectorAll('.auto-spin-option');
-    const betValues = [
-    0, 200, 500, 1000, 2000, 5000, 10000, 20000, 25000, 50000, 
-    100000, 500000, 750000, 1000000, 1500000, 2000000, 
-    2500000, 3000000, 5000000, 10000000
+    // Static predefined bet-amounts
+    const betAmounts = [
+         200, 500, 1000, 2000, 5000, 10000, 20000, 25000, 50000, 
+        100000, 500000, 1000000, 2000000, 2500000, 3000000, 5000000, 10000000
     ];
-    const imageValues = {
-        'a.png': 25,
-        'j.png': 25,
-        'gold.png': 30,
-        'coin.png': 30,
-        'game.png': 30,
-        'luxury.png': 50,
-        'diamond.png': 50,
-        'vip.png': 80,
-        'jackpot.png': 80
-    };
 
     let saldo = 1000;
-    let currentBet = 200;
+    let currentBetIndex = 1; // Start from the second value (200)
     let currentMultiplier = 2;
     let spinning = false;
     let autoSpinActive = false;
@@ -49,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
             burgerMenu.innerHTML = '☰'; // Change back to burger icon
         }
     });
+    
 
     // Update saldo display
     function updateSaldoDisplay() {
@@ -76,24 +66,23 @@ document.addEventListener('DOMContentLoaded', function () {
             stopSpin(); // Stop current spin
         }
     });
+    function spinColumns() {
+    const columns = document.querySelectorAll('.column');
+    columns.forEach((column, index) => {
+        setTimeout(() => {
+            column.classList.add('rolling'); // Add rolling class to start the animation
+        }, index * 300); // Staggered timing for each column
+    });
+
+    setTimeout(() => {
+        columns.forEach(column => column.classList.remove('rolling')); // Remove rolling class to stop the animation
+    }, 3000); // Stop rolling after 3 seconds
+}
 
     // Perform spin logic
     function performSpin() {
         spinning = true;
         spinColumns();
-    }
-
-    // Spin columns function
-    function spinColumns() {
-        const columns = document.querySelectorAll('.column'); // Select your column elements
-        columns.forEach((column, index) => {
-            setTimeout(() => {
-                column.classList.add('rolling'); // Add CSS class for animation
-            }, index * 300); // Staggered timing
-        });
-
-        // Stop after a set time
-        setTimeout(stopSpin, 3000); // Adjust duration as necessary
     }
 
     // Stop spin function
