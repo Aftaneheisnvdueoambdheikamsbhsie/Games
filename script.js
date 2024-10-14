@@ -37,15 +37,61 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function animateSpin(duration) {
-        // Placeholder spin animation logic
-        // Add actual animation logic to randomize the images
-        spinTable.classList.add('spinning'); // CSS class to handle animation
+    const spinTable = document.getElementById('spin-table');
+    const rows = spinTable.getElementsByTagName('tr');
 
-        setTimeout(() => {
-            spinTable.classList.remove('spinning');
-            checkForJackpot();
-        }, duration);
+    // Logika animasi sebenarnya untuk mengacak gambar
+    let spinInterval = setInterval(() => {
+        for (let row of rows) {
+            randomizeRow(row); // Mengacak gambar di setiap baris
+        }
+    }, 100); // Ubah gambar setiap 100ms untuk efek spin cepat
+
+    spinTable.classList.add('spinning'); // Menambahkan kelas CSS untuk efek visual tambahan
+
+    setTimeout(() => {
+        clearInterval(spinInterval); // Hentikan randomisasi setelah durasi selesai
+        spinTable.classList.remove('spinning'); // Hapus efek visual
+        checkForJackpot(); // Cek apakah ada jackpot setelah spin selesai
+    }, duration);
+}
+    
+function showWinMessage() {
+    const winMessage = document.getElementById('win-message');
+    winMessage.classList.add('win-animate');
+
+    // Sembunyikan kembali setelah 3 detik
+    setTimeout(() => {
+        winMessage.classList.remove('win-animate');
+    }, 3000);
+}
+
+function checkForJackpot() {
+    const isJackpot = Math.random() > 0.9; // Placeholder
+    if (isJackpot) {
+        showWinMessage(); // Tampilkan pesan jika menang jackpot
+        // Logika jackpot lainnya
     }
+}
+
+function randomizeRow(row) {
+    let images = Array.from(row.getElementsByTagName('img'));
+    let randomizedImages = shuffleArray(images);
+
+    // Ganti posisi gambar di baris secara acak
+    for (let i = 0; i < images.length; i++) {
+        row.replaceChild(randomizedImages[i], images[i]);
+    }
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 
     // Auto Spin Logic
     autoSpinButton.addEventListener('click', () => {
