@@ -112,14 +112,15 @@
     <h2>Saldo: <span id="score">Rp 1000.00</span></h2>
     
     <!-- Taruhan -->
-    <label for="bet-amount">Taruhan: </label>
-    <input type="range" id="bet-amount" min="0" max="21" step="1" value="0">
-    <span id="bet-value">Rp 0</span>
+    <div class="controls">
+    <input type="number" id="bet-amount" value="200" />
+    <button id="bet-increase">+</button>
+    <button id="bet-decrease">-</button>
 
     <!-- Perkalian -->
     <label for="multiplier">Perkalian: </label>
-    <input type="range" id="multiplier" min="2" max="10" step="1" value="2">
-    <span id="multiplier-value">2x</span>
+    <button id="bet-increase">+</button>
+    <button id="bet-decrease">-</button>
 </div>
 
 <!-- Pesan peringatan saat skor nol -->
