@@ -1,178 +1,135 @@
-/* Reset margin dan padding */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.winning-effect {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    color: gold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    opacity: 0; /* Mulai dengan opacity 0 */
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    z-index: 1000; /* Pastikan berada di atas elemen lain */
 }
 
-/* Aturan dasar untuk body */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4; /* Warna latar belakang */
+.winning-effect.show {
+    opacity: 1; /* Mengubah opacity menjadi 1 saat tampil */
+    transform: translate(-50%, -50%) scale(1.2); /* Membesarkan efek */
 }
-
-/* Header */
-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #222; /* Warna latar belakang header */
-    color: white; /* Warna teks */
-    padding: 10px 20px;
-}
-
-#logo {
-    height: 50px; /* Ukuran logo */
-}
-
-#game-title {
-    font-size: 24px; /* Ukuran judul game */
-}
-
-/* Burger menu */
 .burger-menu {
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .burger-menu .bar {
-    width: 30px;
-    height: 4px;
-    background-color: white; /* Warna bar */
-    margin: 3px 0;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
 }
 
-/* Navigasi */
-#game-menu {
-    display: none; /* Tersembunyi secara default */
+#game-title {
+    font-size: 24px;
+    margin: 0;
+}
+
+nav {
+    background-color: #333;
+    color: white;
     position: absolute;
-    top: 60px; /* Posisi di bawah header */
-    left: 0;
-    width: 250px; /* Lebar navigasi */
-    background-color: #333; /* Warna latar belakang menu */
-    padding: 20px 0;
-    z-index: 10; /* Di atas elemen lainnya */
+    width: 200px;
+    display: none;
 }
 
-#game-menu ul {
-    list-style-type: none; /* Menghapus bullet list */
+nav ul {
+    list-style: none;
+    padding: 0;
 }
 
-#game-menu ul li {
-    padding: 10px 20px;
+nav ul li {
+    padding: 8px;
 }
 
-#game-menu ul li a {
-    color: white; /* Warna teks */
-    text-decoration: none; /* Menghapus garis bawah */
+nav ul li a {
+    color: white;
+    text-decoration: none;
 }
 
-/* Efek hover */
-#game-menu ul li a:hover {
-    background-color: #444; /* Warna latar saat hover */
+nav.hidden {
+    display: none;
 }
 
-/* Kontainer game */
 #game-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
+    margin: 20px;
+    text-align: center;
 }
 
-/* Game board */
 #game-board {
-    overflow: hidden; /* Menghindari spill */
+    margin: 20px auto;
 }
 
-table {
-    border-collapse: collapse; /* Menghapus jarak antar sel */
-}
-
-td {
-    width: 80px; /* Lebar sel */
-    height: 80px; /* Tinggi sel */
-    border: 1px solid #ccc; /* Bingkai sel */
-    text-align: center; /* Teks di tengah */
-    vertical-align: middle; /* Vertikal tengah */
-}
-
-img {
-    max-width: 70%; /* Ukuran gambar sesuai sel */
-    max-height: 70%;
-}
-
-/* Kontrol spin */
 #spin-controls {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin: 20px 0;
 }
 
-button {
-    background-color: #007bff; /* Warna latar tombol */
-    color: white; /* Warna teks tombol */
-    border: none;
-    padding: 10px 20px;
+#spin-button,
+#auto-spin-button {
+    padding: 15px 25px;
+    font-size: 18px;
     margin: 0 10px;
-    cursor: pointer;
-    border-radius: 5px; /* Sudut membulat */
-    transition: background-color 0.3s; /* Transisi saat hover */
 }
 
-button:hover {
-    background-color: #0056b3; /* Warna saat hover */
+.dropdown {
+    position: relative;
 }
 
-/* Panel skor */
-#score-panel {
-    margin-top: 20px;
-    text-align: center; /* Teks di tengah */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 1;
 }
 
-.bet-controls, .multiplier-controls {
+.dropdown-content button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    text-align: left;
+}
+
+.dropdown-content.hidden {
+    display: none;
+}
+
+.bet-controls,
+.multiplier-controls {
     display: flex;
     align-items: center;
-    justify-content: center; /* Center align */
+    justify-content: center;
+    margin: 0 10px;
 }
 
-.bet-controls button, .multiplier-controls button {
-    margin: 0 5px; /* Jarak antar tombol */
+input[type="text"] {
+    width: 80px;
+    text-align: center;
+    border: 1px solid #ddd;
+    margin: 0 5px;
 }
 
-#bet-amount, #multiplier {
-    width: 80px; /* Lebar input */
-    text-align: center; /* Teks di tengah */
-    border: none; /* Menghapus border */
-    background-color: #e9ecef; /* Warna latar belakang input */
-    border-radius: 5px; /* Sudut membulat */
-}
-
-/* Pesan peringatan */
-#warning-message {
-    color: red; /* Warna pesan peringatan */
-    text-align: center; /* Teks di tengah */
+#score-panel {
     margin-top: 20px;
 }
 
-/* Responsif untuk layar kecil */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column; /* Kolom di mobile */
-        align-items: flex-start; /* Menyusun ke kiri */
-    }
+.hidden {
+    display: none;
+}
 
-    #game-menu {
-        width: 100%; /* Lebar penuh di mobile */
-        top: 50px; /* Posisi menyesuaikan */
-    }
-
-    #spin-controls {
-        flex-direction: column; /* Kolom di mobile */
-    }
-
-    button {
-        width: 100%; /* Tombol lebar penuh di mobile */
-    }
+#warning-message {
+    color: red;
+    margin-top: 10px;
 }
