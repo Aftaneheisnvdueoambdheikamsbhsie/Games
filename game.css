@@ -178,6 +178,40 @@ button:hover {
     color: white;
     border-radius: 5px;
 }
+#win-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    color: gold;
+    font-weight: bold;
+    text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+    visibility: hidden;
+    z-index: 10;
+}
+
+@keyframes win-animation {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+}
+
+.win-animate {
+    visibility: visible;
+    animation: win-animation 1s ease-in-out infinite;
+}
+.spinning img {
+    filter: blur(3px); /* Efek blur selama spin */
+    transition: filter 0.1s ease-in-out; /* Transisi halus */
+}
+.spinning img {
+    transition: transform 0.1s ease-in-out;
+    transform: rotate(10deg); /* For subtle rotating effect */
+}
 
 /* Responsive Styling */
 @media (max-width: 768px) {
