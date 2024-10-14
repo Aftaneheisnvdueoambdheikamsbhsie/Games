@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Game Slot</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div id="burger-menu" class="burger-menu">☰</div>
+            <h1>Slot Game</h1>
+            <div id="saldo">Saldo: Rp 1000</div>
+        </header>
+
+        <div id="game-menu" class="hidden">
+            <ul>
+                <li><a href="card.html">Game 1</a></li>
+                <li><a href="#">Game 2</a></li>
+                <li><a href="#">Game 3</a></li>
+            </ul>
+        </div>
+
+        <div class="game-area">
+            <div id="spin-table">
+                <div class="column">
+                    <img src="a.png" alt="a" />
+                    <img src="j.png" alt="j" />
+                    <img src="gold.png" alt="gold" />
+                </div>
+                <div class="column">
+                    <img src="coin.png" alt="coin" />
+                    <img src="game.png" alt="game" />
+                    <img src="luxury.png" alt="luxury" />
+                </div>
+                <div class="column">
+                    <img src="diamond.png" alt="diamond" />
+                    <img src="vip.png" alt="vip" />
+                    <img src="jackpot.png" alt="jackpot" />
+                </div>
+               <div class="column">
+                    <img src="jackpot.png" alt="diamond" />
+                    <img src="a.png" alt="vip" />
+                    <img src="j.png" alt="jackpot" />
+                </div>
+              <div class="column">
+                    <img src="j.png" alt="diamond" />
+                    <img src="coin.png" alt="vip" />
+                    <img src="vip.png" alt="jackpot" />
+                </div>
+                <!-- Additional columns if needed -->
+            </div>
+
+            <div class="controls">
+                <input type="number" id="bet-amount" value="200" />
+                <button id="bet-increase">+</button>
+                <button id="bet-decrease">-</button>
+                <input type="number" id="multiplier" value="2" />
+                <button id="multiplier-increase">+</button>
+                <button id="multiplier-decrease">-</button>
+                <button id="spin-button">Putar</button>
+                <button id="stop-button">Stop</button>
+                <button id="auto-spin-button">Auto Spin</button>
+            </div>
+
+            <div id="win-message" style="display: none;"></div>
+        </div>
+
+        <audio id="spin-sound" src="spin.mp3"></audio>
+        <audio id="win-sound" src="win.mp3"></audio>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
