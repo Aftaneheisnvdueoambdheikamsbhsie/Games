@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let isAutoSpinning = false;
     let autoSpinInterval;
     let score = 1000;  // Starting score
-    const predefinedBetValues = [200, 500, 1000, 5000, 10000,20000,50000,100000,500000,1000000,5000000,10000000];
-    const predefinedMultiplierValues = [2, 3, 4, 5, 6,7,8,9,10];
+    const predefinedBetValues = [200, 500, 1000, 5000, 10000, 20000, 50000, 100000, 500000, 1000000, 5000000, 10000000];
+    const predefinedMultiplierValues = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     // Start Spin
     spinButton.addEventListener('click', () => {
@@ -26,6 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function startSpin() {
         // Deduct bet from score
         let bet = parseInt(betAmountInput.value);
+        if (isNaN(bet) || bet <= 0 || bet > score) {
+            alert('Invalid bet amount!');
+            return;
+        }
+
         score -= bet;
         updateScore();
 
@@ -136,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function adjustBetAmount(direction) {
-        const currentBet = parseInt(betAmountInput.value);
+        const currentBet = parseInt(betAmountInput.value) || 0;
         const currentIndex = predefinedBetValues.indexOf(currentBet);
         const newIndex = currentIndex + direction;
 
@@ -155,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function adjustMultiplier(direction) {
-        const currentMultiplier = parseInt(multiplierInput.value);
+        const currentMultiplier = parseInt(multiplierInput.value) || predefinedMultiplierValues[0];
         const currentIndex = predefinedMultiplierValues.indexOf(currentMultiplier);
         const newIndex = currentIndex + direction;
 
