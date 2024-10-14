@@ -1,198 +1,206 @@
+/* Global Styles */
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
+    background: linear-gradient(135deg, #1e1e1e, #252525);
+    color: #fff;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
 }
 
+#game-container {
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+    background: rgba(50, 50, 50, 0.8);
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
+}
+
+/* Header & Navigation */
 header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .logo img {
-    height: 50px;
-}
-
-.winning-effect {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 48px;
-    color: gold;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-    opacity: 0; /* Mulai dengan opacity 0 */
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-    z-index: 1000; /* Pastikan berada di atas elemen lain */
-}
-
-.winning-effect.show {
-    opacity: 1; /* Mengubah opacity menjadi 1 saat tampil */
-    transform: translate(-50%, -50%) scale(1.2); /* Membesarkan efek */
-}
-
-.burger-menu {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.burger-menu .bar {
-    width: 25px;
-    height: 3px;
-    background-color: white;
-    margin: 4px 0;
+    width: 80px;
+    height: auto;
 }
 
 #game-title {
     font-size: 24px;
-    margin: 0;
+    font-weight: bold;
+    color: gold;
 }
 
-nav {
-    background-color: #333;
-    color: white;
-    position: absolute;
-    width: 200px;
-    display: none;
-    top: 100%; /* Posisi di bawah header */
-    left: 0; /* Rata kiri */
+.burger-menu {
+    cursor: pointer;
+}
+
+.burger-menu .bar {
+    width: 30px;
+    height: 4px;
+    background-color: #fff;
+    margin: 5px 0;
 }
 
 nav ul {
     list-style: none;
+    display: none;
     padding: 0;
 }
 
 nav ul li {
-    padding: 8px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-}
-
-nav.hidden {
-    display: none;
-}
-
-#game-container {
-    margin: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
     text-align: center;
 }
 
-#game-board {
-    margin: 20px auto;
-    position: relative; /* Agar posisi spin table relatif */
+nav ul li a {
+    color: gold;
+    text-decoration: none;
 }
 
-.spin-table img {
-    width: 100px; /* Ukuran gambar */
-    height: auto; /* Menjaga aspek rasio */
-    transition: transform 0.3s; /* Animasi saat gambar diperbarui */
+nav ul.visible {
+    display: block;
+}
+
+/* Game Table */
+#game-board table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-spacing: 5px;
+}
+
+#game-board table img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 #spin-controls {
     display: flex;
-    justify-content: center;
-    margin: 20px 0;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-#spin-button,
+/* Spin Buttons */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background-color: gold;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+button:hover {
+    background-color: darkgoldenrod;
+}
+
+#spin-button {
+    width: 150px;
+}
+
 #auto-spin-button {
-    padding: 15px 25px;
-    font-size: 18px;
-    margin: 0 10px;
-}
-
-.dropdown {
+    width: 150px;
     position: relative;
 }
 
+/* Dropdown for Auto Spin */
 .dropdown-content {
-    display: none;
     position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    z-index: 1;
+    top: 100%;
+    left: 0;
+    background-color: #333;
+    width: 100%;
+    display: none;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .dropdown-content button {
-    display: block;
     width: 100%;
-    padding: 10px;
-    border: none;
-    text-align: left;
+    margin: 5px 0;
+    background-color: darkgray;
 }
 
-.dropdown-content.hidden {
-    display: none;
-}
-
-.bet-controls,
-.multiplier-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 10px;
-}
-
-input[type="text"] {
-    width: 80px;
-    text-align: center;
-    border: 1px solid #ddd;
-    margin: 0 5px;
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 #score-panel {
-    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.hidden {
-    display: none;
+/* Betting Controls */
+.bet-controls, .multiplier-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-#warning-message {
-    color: red;
-    margin-top: 10px;
+.bet-controls button, .multiplier-controls button {
+    width: 40px;
+    height: 40px;
+    background-color: darkgray;
 }
 
-/* Animasi saat gambar spin */
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.bet-controls input, .multiplier-controls input {
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    border: none;
+    background-color: #444;
+    color: white;
+    border-radius: 5px;
 }
 
-/* Style tambahan untuk tampilan responsif */
-@media (max-width: 600px) {
-    #spin-button,
-    #auto-spin-button {
-        padding: 10px 15px;
-        font-size: 16px;
+/* Responsive Styling */
+@media (max-width: 768px) {
+    #game-container {
+        padding: 10px;
     }
-    
-    .bet-controls,
-    .multiplier-controls {
-        flex-direction: column; /* Tumpuk vertikal */
+
+    #game-board table img {
+        width: 70px;
+        height: 70px;
     }
-    
-    input[type="text"] {
-        width: 100%; /* Lebar penuh pada perangkat kecil */
-        margin: 5px 0; /* Margin vertikal */
+
+    #spin-button, #auto-spin-button {
+        width: 120px;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .dropdown-content button {
+        padding: 5px;
+        font-size: 14px;
     }
 }
