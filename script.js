@@ -1,91 +1,111 @@
-// Daftar nilai taruhan sesuai permintaan
-const betValues = [
-    0, 200, 500, 1000, 2000, 5000, 10000, 20000, 25000, 50000,
-    100000, 500000, 750000, 1000000, 1500000, 2000000, 
-    2500000, 3000000, 5000000, 10000000
-];
-
-// Inisialisasi saldo awal
+// Initialize score and bets
 let score = 1000;
-document.getElementById('score').textContent = 'Rp ' + score.toLocaleString();
+let betAmount = 0;
+let multiplier = 2;
+const scoreDisplay = document.getElementById('score');
+const betValueDisplay = document.getElementById('bet-value');
+const multiplierValueDisplay = document.getElementById('multiplier-value');
+const spinButton = document.getElementById('spin-button');
+const warningMessage = document.getElementById('warning-message');
+const spinSound = document.getElementById('spin-sound');
+const winSound = document.getElementById('win-sound');
 
-// Fungsi untuk mengupdate nilai taruhan berdasarkan slider
-document.getElementById('bet-amount').addEventListener('input', function() {
-    const selectedBetIndex = this.value;
-    const selectedBetValue = betValues[selectedBetIndex];
-    document.getElementById('bet-value').textContent = 'Rp ' + selectedBetValue.toLocaleString();
-});
-
-// Fungsi untuk mengupdate nilai perkalian berdasarkan slider
-document.getElementById('multiplier').addEventListener('input', function() {
-    document.getElementById('multiplier-value').textContent = this.value + 'x';
-});
-
-// Fungsi untuk menjalankan Spin
-document.getElementById('spin-button').addEventListener('click', function() {
-    let betAmount = betValues[document.getElementById('bet-amount').value];
-    let multiplier = document.getElementById('multiplier').value;
-
-    if (betAmount > score) {
-        alert('Saldo tidak mencukupi. Silakan kurangi taruhan atau tambahkan saldo.');
-        return;
-    }
-
-    // Kurangi saldo dengan jumlah taruhan
-    score -= betAmount;
-    document.getElementById('score').textContent = 'Rp ' + score.toLocaleString();
-
-    // Simulasikan spin dan hitung kemenangan (contoh sederhana, logika spin perlu dikembangkan)
-    let winAmount = Math.random() < 0.5 ? betAmount * multiplier : 0; // 50% kemungkinan menang
-    score += winAmount;
-
-    // Update saldo setelah spin
-    document.getElementById('score').textContent = 'Rp ' + score.toLocaleString();
-
-    // Mainkan suara spin
-    document.getElementById('spin-sound').play();
-
-    // Jika menang, mainkan suara kemenangan dan tampilkan notifikasi
-    if (winAmount > 0) {
-        document.getElementById('win-sound').play();
-        alert('Anda menang Rp ' + winAmount.toLocaleString() + '!');
-    } else if (score <= 0) {
-        alert('Anda kalah dan saldo habis. Silakan tambahkan saldo untuk bermain lagi.');
-    }
-});
-
-// Fungsi Auto Spin (contoh dengan 10x, 50x, dan 100x)
-function autoSpin(times) {
-    let count = 0;
-    let interval = setInterval(function() {
-        if (count < times) {
-            document.getElementById('spin-button').click();
-            count++;
-        } else {
-            clearInterval(interval);
-        }
-    }, 1000); // Delay 1 detik per spin
+// Update displays
+function updateDisplays() {
+    scoreDisplay.innerText = `Rp ${score.toLocaleString()}`;
+    betValueDisplay.innerText = `Rp ${betAmount.toLocaleString()}`;
+    multiplierValueDisplay.innerText = `${multiplier}x`;
 }
 
-document.getElementById('auto-spin-10').addEventListener('click', function() {
-    autoSpin(10);
+// Handle betting controls
+document.getElementById('bet-increase').addEventListener('click', () => {
+    if (betAmount < score) {
+        betAmount += 100; // Increment bet
+        updateDisplays();
+    }
 });
 
-document.getElementById('auto-spin-50').addEventListener('click', function() {
-    autoSpin(50);
+document.getElementById('bet-decrease').addEventListener('click', () => {
+    if (betAmount > 0) {
+        betAmount -= 100; // Decrement bet
+        updateDisplays();
+    }
 });
 
-document.getElementById('auto-spin-100').addEventListener('click', function() {
-    autoSpin(100);
+// Handle multiplier controls
+document.getElementById('multiplier-increase').addEventListener('click', () => {
+    if (multiplier < 10) {
+        multiplier++;
+        updateDisplays();
+    }
 });
 
-// Mainkan suara ketika slider digeser
-document.getElementById('bet-amount').addEventListener('input', function() {
-    let betSound = new Audio('slider.mp3'); // Tambahkan file suara slider
-    betSound.play();
+document.getElementById('multiplier-decrease').addEventListener('click', () => {
+    if (multiplier > 2) {
+        multiplier--;
+        updateDisplays();
+    }
 });
 
-document.getElementById('multiplier').addEventListener('input', function() {
-    let multiplierSound = new Audio('slider.mp3'); // Tambahkan file suara slider
-    multiplierSound.play();
+// Spin function
+spinButton.addEventListener('click', () => {
+    if (score <= 0) {
+        warningMessage.classList.remove('hidden');
+        return;
+    }
+    warningMessage.classList.add('hidden');
+
+    spinSound.play();
+    // Simulate the spin
+    const results = spin(); // Add your logic for spinning results
+    displayResults(results);
+});
+
+// Mock function for spinning results
+function spin() {
+    // Randomly return 3 results from your available symbols
+    const symbols = ["jackpot", "luxury", "coin", "diamond", "a", "j"];
+    const results = [];
+    for (let i = 0; i < 3; i++) {
+        results.push(symbols[Math.floor(Math.random() * symbols.length)]);
+    }
+    return results;
+}
+
+// Display results and handle winnings
+function displayResults(results) {
+    // Logic to determine if the player wins
+    let win = checkWin(results);
+    if (win) {
+        score += betAmount * multiplier;
+        winSound.play();
+        animateWinningCells(results);
+    } else {
+        score -= betAmount;
+    }
+    updateDisplays();
+}
+
+// Check if there's a win
+function checkWin(results) {
+    // Implement your winning logic
+    return results[0] === results[1] && results[1] === results[2]; // Example condition
+}
+
+// Animate winning cells
+function animateWinningCells(results) {
+    results.forEach((result, index) => {
+        const cell = document.getElementById(`cell-1-${index + 1}`);
+        cell.classList.add('win-animation');
+        // Optionally, you can add a timeout to remove the animation class after a duration
+        setTimeout(() => {
+            cell.classList.remove('win-animation');
+        }, 600); // Match the duration of the animation
+    });
+}
+
+// Burger menu functionality
+document.getElementById('burger-menu').addEventListener('click', () => {
+    const nav = document.getElementById('game-menu');
+    nav.classList.toggle('active');
 });
