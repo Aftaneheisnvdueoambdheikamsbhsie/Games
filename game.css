@@ -194,6 +194,98 @@ button:hover {
     font-weight: bold;
     display: none;
 }
+/* General Styles for the table */
+#spin-table {
+    width: 100%;
+    max-width: 600px; /* Adjust as needed */
+    margin: 0 auto;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#spin-table td {
+    width: 14%; /* 6 columns, so each is about 14% */
+    height: 100px; /* Adjust the height for the image container */
+    border: 1px solid #ccc;
+    padding: 0;
+}
+
+#spin-table img {
+    width: 100%; /* Make the image fill the cell */
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Rolling effect */
+.column.rolling img {
+    animation: roll 0.5s ease-in-out infinite; /* Rolling animation for each column */
+}
+
+@keyframes roll {
+    0% {
+        transform: translateY(0); /* Start at the current position */
+    }
+    50% {
+        transform: translateY(100%); /* Move down by 100% of the height */
+    }
+    100% {
+        transform: translateY(0); /* Return to the starting position */
+    }
+}
+
+/* Toggle Menu Styles */
+#nav-menu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Dark transparent background */
+    text-align: center;
+    padding: 20px 0;
+}
+
+#nav-menu.visible {
+    display: block; /* Show the menu when visible */
+}
+
+#nav-menu a {
+    color: #fff;
+    font-size: 18px;
+    display: block;
+    margin: 10px 0;
+    text-decoration: none;
+}
+
+/* Optional styles for burger menu */
+#burger-menu {
+    font-size: 30px;
+    cursor: pointer;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+#win-message {
+    display: none; /* Hidden by default */
+    text-align: center;
+    color: #ff0; /* Yellow */
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    #spin-table td {
+        height: 80px; /* Adjust for smaller screens */
+    }
+    #spin-table img {
+        width: 90%; /* Slightly smaller images for smaller screens */
+    }
+}
 
 /* Responsive Design */
 @media (max-width: 600px) {
