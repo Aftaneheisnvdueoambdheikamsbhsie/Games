@@ -11,21 +11,22 @@ body {
     color: #fff;
     font-size: 16px;
     display: flex;
-    flex-direction: column; /* Changed to column for header and game container */
+    flex-direction: column; 
     justify-content: center;
     align-items: center;
     height: 100vh;
     overflow: hidden;
 }
 
+/* Header */
 header {
-    position: relative; /* Change to relative to stay in view */
+    position: relative; 
     width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 10px 20px;
     background-color: rgba(0, 0, 0, 0.8);
-    z-index: 1; /* Ensure the header is on top */
+    z-index: 1; 
 }
 
 nav ul {
@@ -41,210 +42,152 @@ nav ul.visible {
     position: absolute;
     right: 10px;
     top: 50px;
-    padding: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
-.logo img {
-    width: 60px; /* Adjusted logo size */
-    height: auto;
+nav a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
 }
 
 #game-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: gold;
+    text-align: center;
 }
 
 .burger-menu {
+    display: flex;
+    flex-direction: column;
     cursor: pointer;
 }
 
 .burger-menu .bar {
-    width: 30px;
     height: 4px;
+    width: 25px;
     background-color: #fff;
-    margin: 5px 0;
+    margin: 2px 0;
 }
 
 #game-container {
-    max-width: 1200px;
-    width: 100%;
-    padding: 20px;
-    background: rgba(50, 50, 50, 0.8);
-    border-radius: 15px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
-    margin-top: 20px; /* Add space below header */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
 }
 
-/* Game Table */
-#game-board table {
-    width: 100%;
-    margin-bottom: 20px;
-    border-spacing: 5px;
+/* Game Board */
+#game-board {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
 }
 
-#game-board table img {
-    width: 100px;
-    height: 100px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-}
-
+/* Spin Controls */
 #spin-controls {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
 }
 
-/* Spin Buttons */
+.bet-controls, .multiplier-controls {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
 button {
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
+    background-color: #007BFF;
+    color: white;
     border: none;
-    border-radius: 10px;
-    background-color: gold;
-    color: black;
+    border-radius: 5px;
+    padding: 10px 15px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: darkgoldenrod;
+    background-color: #0056b3;
 }
 
-#spin-button {
-    width: 150px;
+input[type="number"] {
+    width: 50px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    margin: 0 5px;
+    background: rgba(255, 255, 255, 0.5);
 }
 
-#auto-spin-button {
-    width: 150px;
+#win-message {
+    display: none;
+    font-size: 2rem;
+    color: gold;
+}
+
+/* Dropdown */
+.dropdown {
     position: relative;
 }
 
-/* Dropdown for Auto Spin */
 .dropdown-content {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #333;
-    width: 100%;
     display: none;
-    border-radius: 10px;
-    padding: 10px;
-}
-
-.dropdown-content button {
-    width: 100%;
-    margin: 5px 0;
-    background-color: darkgray;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
-#score-panel {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Spin Table */
+#spin-table {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
     margin-bottom: 20px;
 }
 
-/* Betting Controls */
-.bet-controls, .multiplier-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+#spin-table img {
+    width: 100%; /* Responsive images */
+    height: auto;
 }
 
-.bet-controls button, .multiplier-controls button {
-    width: 40px;
-    height: 40px;
-    background-color: darkgray;
-    margin: 5px; /* Memberikan jarak antara button */
+/* Animations */
+@keyframes spin {
+    0% { transform: rotateX(0); }
+    100% { transform: rotateX(360deg); }
 }
 
-.bet-controls input, .multiplier-controls input {
-    width: 100px;
-    height: 40px;
-    text-align: center;
-    border: none;
-    background-color: #444;
-    color: white;
-    border-radius: 5px;
-}
-
-/* Win Message */
-#win-message {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 50px;
-    color: gold;
-    font-weight: bold;
-    text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
-    visibility: hidden;
-    z-index: 10;
-}
-
-@keyframes win-animation {
-    0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-        transform: translate(-50%, -50%) scale(1.5);
-    }
-}
-
-.win-animate {
-    visibility: visible;
-    animation: win-animation 1s ease-in-out infinite;
-}
-
-.spinning img {
-    filter: blur(1px); /* Efek blur selama spin */
-    transition: filter 0.1s ease-in-out; /* Transisi halus */
-    transform: rotate(10deg); /* Efek rotasi */
-}
-
-/* Animasi untuk Jackpot */
-.jackpot-animate {
-    animation: glowing 1.5s infinite; /* Efek glowing */
-}
-
-@keyframes glowing {
-    0% { opacity: 1; }
-    50% { opacity: 0.7; }
-    100% { opacity: 1; }
-}
-
-/* Responsive Styling */
+/* Responsive Styles */
 @media (max-width: 768px) {
-    #game-container {
-        padding: 10px;
-    }
-
-    #game-board table img {
-        width: 70px;
-        height: 70px;
-    }
-
-    #spin-button, #auto-spin-button {
-        width: 120px;
+    #spin-table {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     button {
-        padding: 8px 16px;
-        font-size: 14px;
+        width: 100%; /* Make buttons full-width on mobile */
+        margin: 10px 0;
     }
 
-    .dropdown-content button {
-        padding: 5px;
-        font-size: 14px;
+    #win-message {
+        font-size: 1.5rem; /* Smaller win message on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    #spin-table {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    }
+
+    button {
+        font-size: 14px; /* Smaller buttons on mobile */
+    }
+
+    #win-message {
+        font-size: 1.2rem; /* Even smaller win message */
     }
 }
