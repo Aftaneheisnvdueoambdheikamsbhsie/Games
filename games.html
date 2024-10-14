@@ -8,18 +8,31 @@
 </head>
 <body>
     <header>
+        <div class="logo"> 
+            <img src="AmD.png" alt="Logo" id="logo"> 
+        </div>
+        <div class="burger-menu" id="burger-menu">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
         <h1 id="game-title">Winning Spin - Level99</h1>
     </header>
+
+    <nav id="game-menu">
+        <ul>
+            <li><a href="#">Tebak Kartu</a></li>
+            <li><a href="#">Ilusi</a></li>
+            <li><a href="#">Lempar Dadu</a></li>
+            <li><a href="#">Spin Hoki</a></li>
+        </ul>
+    </nav>
 
     <div id="game-container">
         <div id="game-board">
             <table>
                 <tbody id="spin-table">
-                    <!-- Matriks 7x6 -->
-                    
-                <!-- Baris 1 sampai 6 (dengan id masing-masing sel) -->
-                <!-- Baris 1 -->
-                <tr>
+                    <tr>
                     <td><img src="coin.png" id="cell-1-1" /></td>
                     <td><img src="Diamond.png" id="cell-1-2" /></td>
                     <td><img src="game.png" id="cell-1-3" /></td>
@@ -74,7 +87,8 @@
                     <td><img src="coin.png" id="cell-6-6" /></td>
                     <td><img src="treasure-chest.png" id="cell-6-7" /></td>
                 </tr>
-                    <!-- Baris 2-6 diulang sesuai kebutuhan -->
+                    <!-- Matriks 7x6 -->
+                    <!-- isi tabel seperti sebelumnya -->
                 </tbody>
             </table>
         </div>
@@ -82,54 +96,33 @@
         <!-- Tombol Spin -->
         <div id="spin-controls">
             <button id="spin-button">Spin</button>
-            <button id="auto-spin-10">Auto Spin 10x</button>
-            <button id="auto-spin-50">Auto Spin 50x</button>
-            <button id="auto-spin-100">Auto Spin 100x</button>
+            <div class="dropdown">
+                <button id="auto-spin-button">Auto Spin</button>
+                <div class="dropdown-content">
+                    <button id="auto-spin-10">10x</button>
+                    <button id="auto-spin-50">50x</button>
+                    <button id="auto-spin-100">100x</button>
+                </div>
+            </div>
         </div>
 
         <!-- Pengaturan Score dan Multiplier -->
-        <div id="score-panel">
-            <h2>Saldo: <span id="score">Rp 1000.00</span></h2>
-            <label for="bet-amount">Taruhan: </label>
-            <select id="bet-amount">
-                <option value="0">0</option>
-                <option value="200">200</option>
-                <option value="500">500</option>
-                <option value="1000">1000</option>
-                <option value="2000">2000</option>
-                <option value="5000">5000</option>
-                <option value="10000">10000</option>
-                <option value="20000">20000</option>
-                <option value="25000">25000</option>
-                <option value="50000">50000</option>
-                <option value="100000">100000</option>
-                <option value="500000">500000</option>
-                <option value="750000">750000</option>
-                <option value="1000000">1000000</option>
-                <option value="15000000">1500000</option>
-                <option value="2000000">2000000</option
-                <option value="2500000">2500000</option>
-                <option value="3000000">3000000</option>
-                <option value="5000000">5000000</option>
-                <option value="10000000">10000000</option>                             
-                <!-- Tambahkan opsi lainnya sesuai kebutuhan -->
-            </select>
-            <label for="multiplier">Perkalian: </label>
-            <select id="multiplier">
-                <option value="2">2x</option>
-                <option value="3">3x</option>
-                <option value="4">4x</option>
-                <option value="5">5x</option>
-                <option value="2">6x</option>
-                <option value="3">7x</option>
-                <option value="4">8x</option>
-                <option value="5">9x</option>
-                <option value="2">10x</option>
-                
-                <!-- Tambahkan opsi lainnya sesuai kebutuhan -->
-            </select>
-        </div>
-    </div>
+<div id="score-panel">
+    <h2>Saldo: <span id="score">Rp 1000.00</span></h2>
+    
+    <!-- Taruhan -->
+    <label for="bet-amount">Taruhan: </label>
+    <input type="range" id="bet-amount" min="0" max="21" step="1" value="0">
+    <span id="bet-value">Rp 0</span>
+
+    <!-- Perkalian -->
+    <label for="multiplier">Perkalian: </label>
+    <input type="range" id="multiplier" min="2" max="10" step="1" value="2">
+    <span id="multiplier-value">2x</span>
+</div>
+
+<!-- Pesan peringatan saat skor nol -->
+    <div id="warning-message" class="hidden">Anda tidak punya skor lagi untuk bermain!</div>
 
     <!-- Audio -->
     <audio id="spin-sound" src="spin.mp3"></audio>
@@ -138,7 +131,14 @@
     <script src="script.js"></script>
 </body>
 </html>
+    
 
+
+
+
+        
+
+        
 
 
 
