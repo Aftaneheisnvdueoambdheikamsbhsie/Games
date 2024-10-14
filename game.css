@@ -1,0 +1,64 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #333;
+    margin-top: 20px;
+}
+
+#game-board {
+    display: inline-block;
+    margin: 20px auto;
+    background-color: #fff;
+    border: 5px solid #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+table {
+    border-spacing: 10px;
+}
+
+td {
+    width: 80px;
+    height: 80px;
+    background-color: #eee;
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+#spin-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#spin-button:hover {
+    background-color: #45a049;
+}
+
+#score {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+#spin-button:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+}
