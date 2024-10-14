@@ -18,18 +18,20 @@ body {
     overflow: hidden;
 }
 
+/* Header Styles */
 header {
     position: relative;
     width: 100%;
     display: flex;
-    justify-content: flex-start; /* Align items to the left */
+    justify-content: flex-start;
+    align-items: center;
     padding: 10px 20px;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 1;
 }
 
 .logo img {
-    width: 60px; 
+    width: 60px;
     height: auto;
 }
 
@@ -37,7 +39,7 @@ header {
     font-size: 24px;
     font-weight: bold;
     color: gold;
-    margin-left: 10px; /* Space between logo and title */
+    margin-left: 10px;
 }
 
 .burger-menu {
@@ -46,7 +48,7 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-right: 20px; /* Spacing for the burger menu */
+    margin-right: 20px;
 }
 
 .burger-menu .bar {
@@ -56,9 +58,10 @@ header {
     margin: 5px 0;
 }
 
+/* Navigation Styles */
 nav ul {
     list-style: none;
-    display: none; /* Hidden by default */
+    display: none;
     padding: 0;
 }
 
@@ -73,6 +76,7 @@ nav ul.visible {
     border-radius: 10px;
 }
 
+/* Game Container */
 #game-container {
     max-width: 1200px;
     width: 100%;
@@ -83,7 +87,7 @@ nav ul.visible {
     margin-top: 20px;
 }
 
-/* Game Table */
+/* Game Board */
 #game-board {
     width: 100%;
     margin-bottom: 20px;
@@ -101,6 +105,7 @@ nav ul.visible {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
+/* Spin Controls */
 #spin-controls {
     display: flex;
     justify-content: space-between;
@@ -108,7 +113,6 @@ nav ul.visible {
     margin-bottom: 20px;
 }
 
-/* Spin Buttons */
 button {
     padding: 10px 20px;
     font-size: 16px;
@@ -131,7 +135,7 @@ button:hover {
     position: relative;
 }
 
-/* Dropdown for Auto Spin */
+/* Auto Spin Dropdown */
 .dropdown-content {
     position: absolute;
     top: 100%;
@@ -147,6 +151,7 @@ button:hover {
     display: block;
 }
 
+/* Score Panel */
 #score-panel {
     display: flex;
     justify-content: space-between;
@@ -154,7 +159,7 @@ button:hover {
     margin-bottom: 20px;
 }
 
-/* Betting Controls */
+/* Bet and Multiplier Controls */
 .bet-controls, .multiplier-controls {
     display: flex;
     justify-content: space-between;
@@ -190,11 +195,11 @@ button:hover {
     display: none;
 }
 
-/* Responsive */
+/* Responsive Design */
 @media (max-width: 600px) {
     header {
         flex-direction: column;
-        align-items: flex-start; /* Align items to the left */
+        align-items: flex-start;
     }
 
     #spin-controls {
@@ -211,15 +216,15 @@ button:hover {
     }
 
     nav ul {
-        width: 100%; /* Full width on mobile */
-        right: 0; /* Align to the right */
+        width: 100%;
+        right: 0;
     }
 
     nav ul.visible {
-        padding: 10px; /* Add padding for mobile */
+        padding: 10px;
     }
 
     .burger-menu {
-        margin-right: 20px; /* Spacing for mobile */
+        margin-right: 20px;
     }
 }
