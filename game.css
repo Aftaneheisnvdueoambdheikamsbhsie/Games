@@ -16,6 +16,78 @@ body {
     height: 100vh;
     overflow: hidden;
 }
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+nav ul {
+    list-style: none;
+    display: none;
+    padding: 0;
+}
+
+nav ul.visible {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    right: 10px;
+    top: 50px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.logo img {
+    width: 80px;
+    height: auto;
+}
+
+#game-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: gold;
+}
+
+.burger-menu {
+    cursor: pointer;
+}
+
+.burger-menu .bar {
+    width: 30px;
+    height: 4px;
+    background-color: #fff;
+    margin: 5px 0;
+}
+
+nav ul {
+    list-style: none;
+    display: none;
+    padding: 0;
+}
+
+nav ul li {
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+nav ul li a {
+    color: gold;
+    text-decoration: none;
+}
+
+nav ul.visible {
+    display: block;
+}
+
 
 #game-container {
     max-width: 1200px;
