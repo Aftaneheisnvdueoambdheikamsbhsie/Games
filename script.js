@@ -35,6 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
             spinSound.pause();
         }, spinDuration);
     }
+    
+let score = 1000;
+
+function updateScore(amount) {
+    score += amount;
+    document.getElementById('saldo').textContent = `Saldo: Rp ${score.toFixed(2)}`;
+}
+
+function checkForJackpot() {
+    const isJackpot = Math.random() > 0.9;
+    if (isJackpot) {
+        updateScore(500);
+        showWinMessage(); 
+    }
+}
 
     function animateSpin(duration) {
     const spinTable = document.getElementById('spin-table');
@@ -65,15 +80,16 @@ function showWinMessage() {
         winMessage.classList.remove('win-animate');
     }, 3000);
 }
-
 function checkForJackpot() {
-    const isJackpot = Math.random() > 0.9; // Placeholder
+    const isJackpot = /* Logika deteksi jackpot */;
+
     if (isJackpot) {
-        showWinMessage(); // Tampilkan pesan jika menang jackpot
-        // Logika jackpot lainnya
+        spinTable.classList.add('blurred'); // Tambahkan efek blur
+        showWinMessage(); // Tampilkan pesan kemenangan
+    } else {
+        spinTable.classList.remove('blurred'); // Hapus blur jika tidak ada jackpot
     }
 }
-
 function randomizeRow(row) {
     let images = Array.from(row.getElementsByTagName('img'));
     let randomizedImages = shuffleArray(images);
