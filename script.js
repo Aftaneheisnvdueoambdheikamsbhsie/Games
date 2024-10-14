@@ -1,79 +1,91 @@
-const images = ['Diamond.png', 'coin.png', 'jackpot.png', 'vip.png', 'luxury.png', 'a.png', 'treasure-chest.png', 'game.png'];
-const rows = 6;
-const cols = 7;
-let score = 1000.00; // Mulai dengan modal Rp 1000.00
-let autoSpinCount = 0;
-let spinInterval;
+// Daftar nilai taruhan sesuai permintaan
+const betValues = [
+    0, 200, 500, 1000, 2000, 5000, 10000, 20000, 25000, 50000,
+    100000, 500000, 750000, 1000000, 1500000, 2000000, 
+    2500000, 3000000, 5000000, 10000000
+];
 
-// Fungsi untuk memutar spin
-function spin() {
-    const betAmount = parseFloat(document.getElementById('bet-amount').value);
-    const multiplier = parseFloat(document.getElementById('multiplier').value);
-    if (score >= betAmount) {
-        score -= betAmount; // Kurangi saldo dengan taruhan
-        updateScore();
+// Inisialisasi saldo awal
+let score = 1000;
+document.getElementById('score').textContent = 'Rp ' + score.toLocaleString();
 
-        // Play spin sound
-        const spinSound = document.getElementById('spin-sound');
-        spinSound.play();
+// Fungsi untuk mengupdate nilai taruhan berdasarkan slider
+document.getElementById('bet-amount').addEventListener('input', function() {
+    const selectedBetIndex = this.value;
+    const selectedBetValue = betValues[selectedBetIndex];
+    document.getElementById('bet-value').textContent = 'Rp ' + selectedBetValue.toLocaleString();
+});
 
-        let spinCount = 0;
-        const intervalId = setInterval(() => {
-            if (spinCount >= 10) {
-                clearInterval(intervalId);
-                calculatePrize(multiplier);
-                return;
-            }
-            for (let r = 1; r <= rows; r++) {
-                for (let c = 1; c <= cols; c++) {
-                    const randomImage = images[Math.floor(Math.random() * images.length)];
-                    const cell = document.getElementById(`cell-${r}-${c}`);
-                    cell.src = randomImage;
-                }
-            }
-            spinCount++;
-        }, 200);
-    } else {
-        alert("Saldo tidak cukup!");
+// Fungsi untuk mengupdate nilai perkalian berdasarkan slider
+document.getElementById('multiplier').addEventListener('input', function() {
+    document.getElementById('multiplier-value').textContent = this.value + 'x';
+});
+
+// Fungsi untuk menjalankan Spin
+document.getElementById('spin-button').addEventListener('click', function() {
+    let betAmount = betValues[document.getElementById('bet-amount').value];
+    let multiplier = document.getElementById('multiplier').value;
+
+    if (betAmount > score) {
+        alert('Saldo tidak mencukupi. Silakan kurangi taruhan atau tambahkan saldo.');
+        return;
     }
-}
 
-// Fungsi untuk menghitung hadiah
-function calculatePrize(multiplier) {
-    let prize = 0;
-    // Logika untuk menghitung kemenangan di sini (misal 3 ikon sama)
-    // Contoh:
-    // Jika 3 ikon 'jackpot' dalam satu baris, menangkan hadiah
-    prize = 200 * multiplier; // Contoh hadiah berdasarkan multiplier
-    score += prize;
-    updateScore();
+    // Kurangi saldo dengan jumlah taruhan
+    score -= betAmount;
+    document.getElementById('score').textContent = 'Rp ' + score.toLocaleString();
 
-    if (prize > 0) {
-        const winSound = document.getElementById('win-sound');
-        winSound.play();
+    // Simulasikan spin dan hitung kemenangan (contoh sederhana, logika spin perlu dikembangkan)
+    let winAmount = Math.random() < 0.5 ? betAmount * multiplier : 0; // 50% kemungkinan menang
+    score += winAmount;
+
+    // Update saldo setelah spin
+    document.getElementById('score').textContent = 'Rp ' + score.toLocaleString();
+
+    // Mainkan suara spin
+    document.getElementById('spin-sound').play();
+
+    // Jika menang, mainkan suara kemenangan dan tampilkan notifikasi
+    if (winAmount > 0) {
+        document.getElementById('win-sound').play();
+        alert('Anda menang Rp ' + winAmount.toLocaleString() + '!');
+    } else if (score <= 0) {
+        alert('Anda kalah dan saldo habis. Silakan tambahkan saldo untuk bermain lagi.');
     }
-}
+});
 
-// Fungsi untuk memperbarui tampilan saldo
-function updateScore() {
-    document.getElementById('score').innerText = `Rp ${score.toFixed(2)}`;
-}
-
-// Spin otomatis
+// Fungsi Auto Spin (contoh dengan 10x, 50x, dan 100x)
 function autoSpin(times) {
-    autoSpinCount = times;
-    spinInterval = setInterval(() => {
-        if (autoSpinCount <= 0) {
-            clearInterval(spinInterval);
-            return;
+    let count = 0;
+    let interval = setInterval(function() {
+        if (count < times) {
+            document.getElementById('spin-button').click();
+            count++;
+        } else {
+            clearInterval(interval);
         }
-        spin();
-        autoSpinCount--;
-    }, 1500);
+    }, 1000); // Delay 1 detik per spin
 }
 
-// Event listeners
-document.getElementById('spin-button').addEventListener('click', spin);
-document.getElementById('auto-spin-10').addEventListener('click', () => autoSpin(10));
-document.getElementById('auto-spin-50').addEventListener('click', () => autoSpin(50));
-document.getElementById('auto-spin-100').addEventListener('click', () => autoSpin(100));
+document.getElementById('auto-spin-10').addEventListener('click', function() {
+    autoSpin(10);
+});
+
+document.getElementById('auto-spin-50').addEventListener('click', function() {
+    autoSpin(50);
+});
+
+document.getElementById('auto-spin-100').addEventListener('click', function() {
+    autoSpin(100);
+});
+
+// Mainkan suara ketika slider digeser
+document.getElementById('bet-amount').addEventListener('input', function() {
+    let betSound = new Audio('slider.mp3'); // Tambahkan file suara slider
+    betSound.play();
+});
+
+document.getElementById('multiplier').addEventListener('input', function() {
+    let multiplierSound = new Audio('slider.mp3'); // Tambahkan file suara slider
+    multiplierSound.play();
+});
