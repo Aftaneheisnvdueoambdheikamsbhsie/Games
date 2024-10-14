@@ -205,7 +205,7 @@ button:hover {
     animation: win-animation 1s ease-in-out infinite;
 }
 .spinning img {
-    filter: blur(3px); /* Efek blur selama spin */
+    filter: blur(1px); /* Efek blur selama spin */
     transition: filter 0.1s ease-in-out; /* Transisi halus */
 }
 .spinning img {
