@@ -167,6 +167,7 @@ button:disabled {
     font-size: 12px;
     cursor: pointer;
 }
+
 /* Control Styles */
 #controls {
     display: flex;
