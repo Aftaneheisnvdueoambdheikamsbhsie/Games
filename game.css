@@ -61,262 +61,154 @@ header {
 /* Navigation Styles */
 nav ul {
     list-style: none;
-    display: none;
-    padding: 0;
-}
-
-nav ul.visible {
     display: flex;
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.9);
     position: absolute;
-    right: 10px;
     top: 50px;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-/* Game Container */
-#game-container {
-    max-width: 1200px;
-    width: 100%;
-    padding: 20px;
-    background: rgba(50, 50, 50, 0.8);
-    border-radius: 15px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
-    margin-top: 20px;
-}
-
-/* Game Board */
-#game-board {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-#game-board table {
-    width: 100%;
-    border-spacing: 5px;
-}
-
-#game-board table img {
-    width: 100px;
-    height: 100px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-/* Spin Controls */
-#spin-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    background-color: gold;
-    color: black;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-}
-
-button:hover {
-    background-color: darkgoldenrod;
-}
-
-#spin-button, #auto-spin-button {
-    width: 150px;
-    position: relative;
-}
-
-/* Auto Spin Dropdown */
-.dropdown-content {
-    position: absolute;
-    top: 100%;
     left: 0;
-    background-color: #333;
-    width: 100%;
-    display: none;
-    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 200px;
     padding: 10px;
+    display: none; /* Hidden by default */
 }
 
-.dropdown:hover .dropdown-content {
+nav ul.show {
     display: block;
 }
 
-/* Score Panel */
-#score-panel {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+nav ul li {
+    margin: 10px 0;
 }
 
-/* Bet and Multiplier Controls */
-.bet-controls, .multiplier-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px;
+    display: block;
 }
 
-.bet-controls button, .multiplier-controls button {
-    width: 40px;
-    height: 40px;
-    background-color: darkgray;
-    margin: 5px;
-}
-
-.bet-controls input, .multiplier-controls input {
-    width: 100px;
-    height: 40px;
-    text-align: center;
-    border: none;
+nav ul li a:hover {
     background-color: #444;
-    color: white;
     border-radius: 5px;
 }
 
-/* Win Message */
-#win-message {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 50px;
-    color: gold;
-    font-weight: bold;
-    display: none;
+/* Game Board Styles */
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
 }
-/* General Styles for the table */
-#spin-table {
+
+.column img {
     width: 100%;
-    max-width: 600px; /* Adjust as needed */
-    margin: 0 auto;
-    border-collapse: collapse;
-    text-align: center;
-}
-
-#spin-table td {
-    width: 14%; /* 6 columns, so each is about 14% */
-    height: 100px; /* Adjust the height for the image container */
-    border: 1px solid #ccc;
-    padding: 0;
-}
-
-#spin-table img {
-    width: 100%; /* Make the image fill the cell */
     height: auto;
-    transition: transform 0.3s ease-in-out;
+    border-radius: 5px;
+    transition: transform 0.5s ease-in-out;
 }
 
-/* Rolling effect */
-.column.rolling img {
-    animation: roll 0.5s ease-in-out infinite; /* Rolling animation for each column */
-}
-
-@keyframes roll {
-    0% {
-        transform: translateY(0); /* Start at the current position */
-    }
-    50% {
-        transform: translateY(100%); /* Move down by 100% of the height */
-    }
-    100% {
-        transform: translateY(0); /* Return to the starting position */
-    }
-}
-
-/* Toggle Menu Styles */
-#nav-menu {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Dark transparent background */
-    text-align: center;
-    padding: 20px 0;
-}
-
-#nav-menu.visible {
-    display: block; /* Show the menu when visible */
-}
-
-#nav-menu a {
-    color: #fff;
-    font-size: 18px;
-    display: block;
-    margin: 10px 0;
-    text-decoration: none;
-}
-
-/* Optional styles for burger menu */
-#burger-menu {
-    font-size: 30px;
-    cursor: pointer;
-    color: #fff;
-    background-color: transparent;
+/* Button Styles */
+button {
+    background-color: gold;
+    color: black;
     border: none;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
-
-#win-message {
-    display: none; /* Hidden by default */
-    text-align: center;
-    color: #ff0; /* Yellow */
-    font-size: 24px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
     font-weight: bold;
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.3s ease;
 }
 
-/* Responsive adjustments */
-@media (max-width: 600px) {
-    #spin-table td {
-        height: 80px; /* Adjust for smaller screens */
-    }
-    #spin-table img {
-        width: 90%; /* Slightly smaller images for smaller screens */
-    }
+button:hover {
+    background-color: #fff700;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
+#spin-button, #auto-spin-button {
+    background-color: #f5c518;
+}
+
+button:disabled {
+    background-color: #666;
+    cursor: not-allowed;
+}
+
+/* Betting and Multiplier Controls */
+#bet-amount, #multiplier {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: gold;
+    border: 2px solid gold;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    width: 80px;
+    margin: 5px;
+}
+
+#bet-increase, #bet-decrease, #multiplier-increase, #multiplier-decrease {
+    display: inline-block;
+    background-color: #333;
+    color: gold;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Score Display */
+#score {
+    font-size: 20px;
+    color: #fff;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+#warning-message {
+    color: red;
+    font-size: 18px;
+    padding: 10px;
+    display: none; /* Hidden by default */
+}
+
+/* Footer */
+footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    color: #ccc;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+
     header {
         flex-direction: column;
         align-items: flex-start;
     }
 
-    #spin-controls {
-        flex-direction: column;
-        align-items: center;
+    #game-board {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
     }
 
     button {
-        width: 80%;
+        width: 100%;
+        font-size: 14px;
     }
 
-    #win-message {
-        font-size: 30px;
+    #bet-amount, #multiplier {
+        width: 60px;
+        font-size: 16px;
     }
 
     nav ul {
         width: 100%;
-        right: 0;
-    }
-
-    nav ul.visible {
-        padding: 10px;
-    }
-
-    .burger-menu {
-        margin-right: 20px;
     }
 }
