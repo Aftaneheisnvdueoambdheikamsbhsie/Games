@@ -89,36 +89,32 @@
                 </tr>
             </table>
         </div>
+        <div id="controls">
+    <button id="bet-decrease">-</button>
+    <span id="bet-amount">200</span>
+    <button id="bet-increase">+</button>
 
-        <!-- Tombol Spin -->
-        <div id="spin-controls">
-            <button id="spin-button">Spin</button>
-            <div class="dropdown">
-                <button id="auto-spin-button">Auto Spin</button>
-                <div class="dropdown-content">
-                    <button id="auto-spin-10">10x</button>
-                    <button id="auto-spin-50">50x</button>
-                    <button id="auto-spin-100">100x</button>
-                </div>
-            </div>
-        </div>
+    <div id="auto-spin-container">
+        <button id="auto-spin-button">Auto Spin</button>
+        <select id="auto-spin-options">
+            <option value="10">10 Spins</option>
+            <option value="20">20 Spins</option>
+            <option value="50">50 Spins</option>
+            <option value="100">100 Spins</option>
+        </select>
+    </div>
 
         <!-- Pengaturan Score dan Multiplier -->
         <div id="score-panel">
             <h2>Saldo: <span id="score">Rp 1000.00</span></h2>
             
-            <!-- Taruhan -->
-            <div class="controls">
-                <label for="bet-amount">Taruhan:</label>
-                <input type="number" id="bet-amount" value="200" />
-                <button id="bet-increase">+</button>
-                <button id="bet-decrease">-</button>
+         
+    <button id="stop-button">Stop</button> <!-- Tambahan stop button -->
+    <button id="spin-button">Spin</button>
+</div>
 
-                <label for="multiplier">Perkalian:</label>
-                <input type="number" id="multiplier" value="2" />
-                <button id="multiplier-increase">+</button>
-                <button id="multiplier-decrease">-</button>
-            </div>
+
+        
 
             <!-- Pesan peringatan saat skor nol -->
             <div id="warning-message" class="hidden">Anda tidak punya skor lagi untuk bermain!</div>
