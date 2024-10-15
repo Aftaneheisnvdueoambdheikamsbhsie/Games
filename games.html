@@ -1,56 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Winning-Spin Level99.com</title>
-    <link rel="stylesheet" href="game.css"> <!-- Link to your CSS file -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winning Spin - Level99.com</title>
+    <link rel="stylesheet" href="game.css">
 </head>
 <body>
-    <div class="header">
-        <h1>winning-Spin level99.com</h1>
-        <div class="controls">
-            <div class="bet-control">
-                <button id="bet-decrease">-</button>
-                <span id="bet-amount">200</span>
-                <button id="bet-increase">+</button>
-            </div>
-            <button id="spin-button">Spin</button>
-            <button id="auto-spin-button">Auto Spin</button>
-            <button id="stop-button">Stop</button>
-        </div>
-    </div>
-    <div class="score-display">
-        <p id="score">Score: 0</p>
-    </div>
-    <div id="game-board">
-        <div class="column">
-            <img src="game.png" alt="Image 1">
-            <img src="Diamond.png" alt="Image 2">
-            <img src="jackpot.png" alt="Jackpot">
-            <img src="vip.png" alt="VIP">
-            <!-- Add more images as needed -->
-        </div>
-        <div class="column">
-            <img src="gold.png" alt="Image 1">
-            <img src="luxury.png" alt="Image 2">
-            <img src="jackpot.png" alt="Jackpot">
-            <img src="vip.png" alt="VIP">
-            <!-- Add more images as needed -->
-        </div>
-        <div class="column">
-            <img src="Diamond.png" alt="Image 1">
-            <img src="a.png" alt="Image 2">
-            <img src="jackpot.png" alt="Jackpot">
-            <img src="vip.png" alt="VIP">
-            <!-- Add more images as needed -->
-        </div>
-        <!-- Add more columns as needed -->
-    </div>
-    <audio id="spin-sound" src="spin.mp3"></audio> <!-- Add audio for spin -->
-    <audio id="win-sound" src="win.mp3"></audio> <!-- Add audio for winning -->
-    <script src="games.js"></script> <!-- Link to your JavaScript file -->
+    <header>
+        <div class="logo"> 
+            <img src="AdM.webp" alt="Logo" id="logo"> 
+        </div>
+        <div class="burger-menu" id="burger-menu">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <h1 id="game-title">Winning Spin - Level99</h1>
+    </header>
+
+    <nav id="game-menu">
+        <ul>
+            <li><a href="Card.html">Tebak Kartu</a></li>
+            <li><a href="ilision.html">Ilusi</a></li>
+            <li><a href="DDadus.html">Lempar Dadu</a></li>
+            <li><a href="rotate.html">Spin Hoki</a></li>
+        </ul>
+    </nav>
+
+    <div id="game-container">
+        <div id="game-board">
+            <table id="spin-table">
+                <tr>
+                    <td class="column"><img src="a.png" alt="image 1"></td>
+                    <td class="column"><img src="Diamond.png" alt="image 2"></td>
+                    <td class="column"><img src="treasure-chest.png" alt="image 3"></td>
+                    <td class="column"><img src="vip.png" alt="image 4"></td>
+                    <td class="column"><img src="j.png" alt="image 5"></td>
+                    <td class="column"><img src="coin.png" alt="image 6"></td>
+                </tr>
+                <tr>
+                    <td class="column"><img src="coin.png" alt="image 7"></td>
+                    <td class="column"><img src="game.png" alt="image 8"></td>
+                    <td class="column"><img src="vip.png" alt="image 9"></td>
+                    <td class="column"><img src="jackpot.png" alt="image 10"></td>
+                    <td class="column"><img src="Diamond.png" alt="image 11"></td>
+                    <td class="column"><img src="luxury.png" alt="image 12"></td>
+                </tr>
+                <tr>
+                    <td class="column"><img src="luxury.png" alt="image 13"></td>
+                    <td class="column"><img src="coin.png" alt="image 14"></td>
+                    <td class="column"><img src="gold.png" alt="image 15"></td>
+                    <td class="column"><img src="vip.png" alt="image 16"></td>
+                    <td class="column"><img src="treasure-chest.png" alt="image 17"></td>
+                    <td class="column"><img src="jackpot.png" alt="image 18"></td>
+                </tr>
+                <tr>
+                    <td class="column"><img src="treasure-chest.png" alt="image 19"></td>
+                    <td class="column"><img src="j.png" alt="image 20"></td>
+                    <td class="column"><img src="vip.png" alt="image 21"></td>
+                    <td class="column"><img src="luxury.png" alt="image 22"></td>
+                    <td class="column"><img src="gold.png" alt="image 23"></td>
+                    <td class="column"><img src="coin.png" alt="image 24"></td>
+                </tr>
+                <tr>
+                    <td class="column"><img src="gold.png" alt="image 25"></td>
+                    <td class="column"><img src="game.png" alt="image 26"></td>
+                    <td class="column"><img src="j.png" alt="image 27"></td>
+                    <td class="column"><img src="a.png" alt="image 28"></td>
+                    <td class="column"><img src="jackpot.png" alt="image 29"></td>
+                    <td class="column"><img src="luxury.png" alt="image 30"></td>
+                </tr>
+                <tr>
+                    <td class="column"><img src="a.png" alt="image 31"></td>
+                    <td class="column"><img src="j.png" alt="image 32"></td>
+                    <td class="column"><img src="Diamond.png" alt="image 33"></td>
+                    <td class="column"><img src="luxury.png" alt="image 34"></td>
+                    <td class="column"><img src="treasure-chest.png" alt="image 35"></td>
+                    <td class="column"><img src="gold.png" alt="image 36"></td>
+                </tr>
+                <tr>
+                    <td class="column"><img src="coin.png" alt="image 37"></td>
+                    <td class="column"><img src="luxury.png" alt="image 38"></td>
+                    <td class="column"><img src="gold.png" alt="image 39"></td>
+                    <td class="column"><img src="j.png" alt="image 40"></td>
+                    <td class="column"><img src="a.png" alt="image 41"></td>
+                    <td class="column"><img src="vip.png" alt="image 42"></td>
+                </tr>
+            </table>
+        </div>
+        <div id="controls">
+    <button id="bet-decrease">-</button>
+    <span id="bet-amount">200</span>
+    <button id="bet-increase">+</button>
+
+    <div id="auto-spin-container">
+        <button id="auto-spin-button">Auto Spin</button>
+        <select id="auto-spin-options">
+            <option value="10">10 Spins</option>
+            <option value="20">20 Spins</option>
+            <option value="50">50 Spins</option>
+            <option value="100">100 Spins</option>
+        </select>
+    </div>
+
+        <!-- Pengaturan Score dan Multiplier -->
+        <div id="score-panel">
+            <h2>Saldo: <span id="score">Rp 1000.00</span></h2>
+         
+    <button id="stop-button">Stop</button> <!-- Tambahan stop button -->
+    <button id="spin-button">Spin</button>
+</div>
+            <!-- Pesan peringatan saat skor nol -->
+            <div id="warning-message" class="hidden">Anda tidak punya skor lagi untuk bermain!</div>
+
+            <!-- Audio -->
+            <audio id="spin-sound" src="spin.mp3"></audio>
+            <audio id="win-sound" src="youwin.mp3"></audio>
+        </div>
+    </div>
+
+    <script src="games.js"></script>
 </body>
 </html>
-
-
