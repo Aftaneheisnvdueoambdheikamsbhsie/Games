@@ -167,6 +167,45 @@ button:disabled {
     font-size: 12px;
     cursor: pointer;
 }
+/* Control Styles */
+#controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Atur jarak antar elemen */
+    margin: 10px;
+}
+
+#auto-spin-container {
+    display: flex;
+    align-items: center; /* Pusatkan item di tengah */
+}
+
+#auto-spin-options {
+    margin-left: 5px; /* Ruang antara button dan dropdown */
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: gold;
+    border: 2px solid gold;
+    border-radius: 5px;
+}
+
+/* Stop Button Styles */
+#stop-button {
+    background-color: #ff4747; /* Warna merah untuk tombol stop */
+    margin-left: 10px; /* Ruang antara tombol */
+}
+
+/* Responsive Styles for Controls */
+@media (max-width: 768px) {
+    #controls {
+        flex-direction: column; /* Menumpuk elemen secara vertikal di layar kecil */
+        align-items: flex-start; /* Rata kiri untuk item */
+    }
+
+    #auto-spin-container {
+        margin-top: 5px; /* Ruang atas untuk dropdown */
+    }
+}
 
 /* Score Display */
 #score {
