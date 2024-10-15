@@ -8,14 +8,20 @@ const betAmounts = [
 let currentBet = betAmounts[0]; // Default bet amount
 let isSpinning = false;
 let autoSpinInterval; // To store the interval ID for auto-spin
+let freeSpins = 0; // Counter for free spins
+let score = 0; // Total score
 
 // DOM elements
 const betAmountDisplay = document.getElementById('bet-amount');
 const spinButton = document.getElementById('spin-button');
 const autoSpinButton = document.getElementById('auto-spin-button');
 const stopButton = document.getElementById('stop-button'); // New stop button
-const gameBoard = document.getElementById('game-board');
+const scoreDisplay = document.getElementById('score'); // Display for score
 const columns = document.querySelectorAll('.column');
+
+// Sound elements
+const spinSound = document.getElementById('spin-sound');
+const winSound = document.getElementById('win-sound');
 
 // Function to update bet amount
 function updateBetAmount(increase = true) {
@@ -37,6 +43,10 @@ function startSpin() {
     if (isSpinning) return;
     isSpinning = true;
     spinButton.disabled = true; // Disable the spin button during spinning
+    spinSound.play(); // Play spin sound
+
+    // Reset score for this spin
+    score = 0;
 
     // Trigger the column animations
     columns.forEach((column, index) => {
@@ -45,10 +55,12 @@ function startSpin() {
         }, index * 200); // Delay each column by 200ms for a cascading effect
     });
 
-    // After the spin finishes, re-enable the button
+    // After the spin finishes, calculate score
     setTimeout(() => {
+        calculateScore();
         isSpinning = false;
         spinButton.disabled = false;
+        scoreDisplay.innerText = `Score: ${score.toLocaleString()}`; // Update score display
     }, columns.length * 400 + 1000); // Total time to finish all column animations
 }
 
@@ -71,6 +83,53 @@ function animateColumn(column) {
             clearInterval(scrollInterval);
         }
     }, 100); // Scroll every 100ms for a smooth animation
+}
+
+// Function to calculate score based on matching images
+function calculateScore() {
+    const imageValues = {
+        'jackpot.png': 10000, // Replace with actual image names
+        'vip.png': 5000,
+        'image1.png': 1000,
+        'image2.png': 500,
+        // Add other image values as needed
+    };
+
+    // Check each column for matches
+    let lastMatchedImage = '';
+    let matchedCount = 0;
+
+    columns.forEach((column) => {
+        const images = column.querySelectorAll('img');
+        const currentImage = images[images.length - 1].src; // Get the last image of the column
+
+        if (lastMatchedImage === currentImage) {
+            matchedCount++;
+        } else {
+            // Check for bonus spins
+            if (matchedCount >= 3) {
+                score += imageValues[lastMatchedImage] * matchedCount; // Calculate score based on matched images
+                freeSpins += 6; // Grant 6 free spins for matching 3 or more
+                winSound.play(); // Play win sound
+            }
+            matchedCount = 1; // Reset for new image
+        }
+
+        lastMatchedImage = currentImage; // Update the last matched image
+    });
+
+    // Final check for the last group
+    if (matchedCount >= 3) {
+        score += imageValues[lastMatchedImage] * matchedCount; // Calculate score for the last group
+        freeSpins += 6; // Grant 6 free spins for matching 3 or more
+        winSound.play(); // Play win sound
+    }
+
+    // Check if there's any bonus spins available
+    if (freeSpins > 0) {
+        alert(`You have ${freeSpins} free spins!`);
+        // Implement free spin logic here if needed
+    }
 }
 
 // Event listener for the spin button
@@ -107,11 +166,13 @@ stopButton.addEventListener('click', () => {
     spinButton.disabled = false; // Re-enable the spin button
 });
 
-// Helper function to display auto-spin options (optional)
-function showAutoSpinMenu(options, onSelect) {
-    const option = prompt(`Choose auto-spin amount: ${options.join(', ')}`, options[0]);
-    const selected = parseInt(option, 10);
+// Function to show auto-spin menu (optional implementation)
+function showAutoSpinMenu(options, callback) {
+    const selectedOption = prompt(`Choose auto-spin amount: ${options.join(', ')}`);
+    const selected = parseInt(selectedOption);
     if (options.includes(selected)) {
-        onSelect(selected);
+        callback(selected);
+    } else {
+        alert('Invalid selection, please try again.');
     }
 }
