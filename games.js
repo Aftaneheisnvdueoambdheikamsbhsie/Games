@@ -7,11 +7,13 @@ const betAmounts = [
 // Game state variables
 let currentBet = betAmounts[0]; // Default bet amount
 let isSpinning = false;
+let autoSpinInterval; // To store the interval ID for auto-spin
 
 // DOM elements
 const betAmountDisplay = document.getElementById('bet-amount');
 const spinButton = document.getElementById('spin-button');
 const autoSpinButton = document.getElementById('auto-spin-button');
+const stopButton = document.getElementById('stop-button'); // New stop button
 const gameBoard = document.getElementById('game-board');
 const columns = document.querySelectorAll('.column');
 
@@ -79,16 +81,13 @@ autoSpinButton.addEventListener('click', () => {
     const autoSpinOptions = [10, 20, 50, 100]; // Example options for auto-spin
     let selectedAutoSpin = autoSpinOptions[0]; // Default option
 
-    // Function to start auto-spin
     function startAutoSpin() {
         let spinCount = 0;
-
-        const autoSpinInterval = setInterval(() => {
+        autoSpinInterval = setInterval(() => {
             if (spinCount >= selectedAutoSpin || !isSpinning) {
                 clearInterval(autoSpinInterval);
                 return;
             }
-
             startSpin();
             spinCount++;
         }, columns.length * 400 + 1500); // Adjust timing for auto-spin
@@ -101,9 +100,15 @@ autoSpinButton.addEventListener('click', () => {
     });
 });
 
+// Stop button functionality
+stopButton.addEventListener('click', () => {
+    clearInterval(autoSpinInterval); // Stop the auto-spin
+    isSpinning = false;
+    spinButton.disabled = false; // Re-enable the spin button
+});
+
 // Helper function to display auto-spin options (optional)
 function showAutoSpinMenu(options, onSelect) {
-    // Create a simple prompt or menu to choose the number of auto spins
     const option = prompt(`Choose auto-spin amount: ${options.join(', ')}`, options[0]);
     const selected = parseInt(option, 10);
     if (options.includes(selected)) {
