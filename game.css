@@ -31,12 +31,12 @@ header {
 }
 
 .logo img {
-    width: 60px;
+    width: 50px; /* Reduced for mobile responsiveness */
     height: auto;
 }
 
 #game-title {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     color: gold;
     margin-left: 10px;
@@ -48,14 +48,14 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .burger-menu .bar {
-    width: 30px;
-    height: 4px;
+    width: 25px;
+    height: 3px;
     background-color: #fff;
-    margin: 5px 0;
+    margin: 4px 0;
 }
 
 /* Navigation Styles */
@@ -67,7 +67,7 @@ nav ul {
     top: 50px;
     left: 0;
     background-color: rgba(0, 0, 0, 0.9);
-    width: 200px;
+    width: 180px;
     padding: 10px;
     display: none; /* Hidden by default */
 }
@@ -83,7 +83,7 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     color: #fff;
-    font-size: 18px;
+    font-size: 16px;
     padding: 10px;
     display: block;
 }
@@ -97,8 +97,8 @@ nav ul li a:hover {
 #game-board {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-    padding: 20px;
+    gap: 8px;
+    padding: 10px;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
 }
@@ -116,11 +116,11 @@ button {
     color: black;
     border: none;
     border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 8px 12px;
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
-    margin: 10px;
+    margin: 8px;
     transition: background-color 0.3s ease;
 }
 
@@ -130,6 +130,7 @@ button:hover {
 
 #spin-button, #auto-spin-button {
     background-color: #f5c518;
+    font-size: 12px; /* Smaller for mobile */
 }
 
 button:disabled {
@@ -137,30 +138,39 @@ button:disabled {
     cursor: not-allowed;
 }
 
+/* Smaller stop button for responsive design */
+#stop-button {
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    padding: 6px 10px;
+    margin: 8px;
+}
+
 /* Betting and Multiplier Controls */
 #bet-amount, #multiplier {
     background-color: rgba(0, 0, 0, 0.7);
     color: gold;
     border: 2px solid gold;
-    padding: 10px;
+    padding: 8px;
     text-align: center;
-    font-size: 18px;
-    width: 80px;
+    font-size: 16px;
+    width: 70px;
     margin: 5px;
 }
 
 #bet-increase, #bet-decrease, #multiplier-increase, #multiplier-decrease {
-    display: inline-block;
     background-color: #333;
     color: gold;
     border-radius: 5px;
-    padding: 5px 10px;
+    padding: 4px 8px;
+    font-size: 12px;
     cursor: pointer;
 }
 
 /* Score Display */
 #score {
-    font-size: 20px;
+    font-size: 18px;
     color: #fff;
     padding: 10px;
     margin-top: 20px;
@@ -168,7 +178,7 @@ button:disabled {
 
 #warning-message {
     color: red;
-    font-size: 18px;
+    font-size: 16px;
     padding: 10px;
     display: none; /* Hidden by default */
 }
@@ -185,7 +195,7 @@ footer {
 /* Responsive Styles */
 @media (max-width: 768px) {
     body {
-        padding: 20px;
+        padding: 15px;
     }
 
     header {
@@ -199,13 +209,22 @@ footer {
     }
 
     button {
-        width: 100%;
-        font-size: 14px;
+        width: 90%;
+        font-size: 12px;
     }
 
     #bet-amount, #multiplier {
         width: 60px;
-        font-size: 16px;
+        font-size: 14px;
+    }
+
+    #spin-button, #auto-spin-button {
+        padding: 6px 10px;
+        font-size: 10px; /* Reduced for mobile */
+    }
+
+    #bet-increase, #bet-decrease {
+        padding: 3px 6px;
     }
 
     nav ul {
