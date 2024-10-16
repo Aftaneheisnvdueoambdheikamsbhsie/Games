@@ -44,6 +44,35 @@ document.addEventListener("DOMContentLoaded", function () {
             isSpinning = false;
         }, 2000);
     }
+const gameBoard = document.getElementById('game-board');
+
+function startSpin() {
+    gameBoard.classList.add('scroll-effect'); // Mulai efek scroll
+    
+    setTimeout(() => {
+        gameBoard.classList.remove('scroll-effect'); // Hentikan efek scroll setelah 2 detik
+        randomizeIcons();
+    }, 2000);
+}
+
+// Fungsi untuk merandom ikon setelah spin berhenti
+function randomizeIcons() {
+    const icons = gameBoard.querySelectorAll('img'); // Asumsikan setiap ikon adalah elemen <img>
+    icons.forEach(icon => {
+        const randomIcon = getRandomIcon(); // Fungsi yang mengembalikan ikon acak
+        icon.src = randomIcon;
+    });
+}
+
+function getRandomIcon() {
+    const iconPaths = [
+        'icon1.png', 'icon2.png', 'icon3.png', // dan seterusnya
+    ];
+    const randomIndex = Math.floor(Math.random() * iconPaths.length);
+    return iconPaths[randomIndex];
+}
+
+document.getElementById('spin-button').addEventListener('click', startSpin);
 
     // Fungsi untuk memeriksa apakah ada kemenangan
     function checkWin() {
