@@ -141,3 +141,17 @@ button:hover {
         grid-template-columns: repeat(3, 1fr); /* Responsif untuk layar kecil */
     }
 }
+
+/* Efek scroll untuk game board */
+.scroll-effect {
+    animation: scroll-spin 2s linear infinite;
+}
+
+@keyframes scroll-spin {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+}
