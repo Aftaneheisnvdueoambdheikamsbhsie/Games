@@ -1,4 +1,3 @@
-/* Global Styles */
 * {
     margin: 0;
     padding: 0;
@@ -7,267 +6,138 @@
 }
 
 body {
-    background: linear-gradient(135deg, #1e1e1e, #252525);
+    background-color: #000; /* Background hitam untuk efek glamor */
     color: #fff;
-    font-size: 16px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: hidden;
 }
 
-/* Header Styles */
 header {
-    position: relative;
-    width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 1;
+    padding: 20px;
+    width: 100%;
+    background: linear-gradient(45deg, #ff4081, #f50057);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .logo img {
-    width: 50px; /* Reduced for mobile responsiveness */
+    width: 80px;
     height: auto;
 }
 
-#game-title {
-    font-size: 20px;
-    font-weight: bold;
-    color: gold;
-    margin-left: 10px;
-}
-
-.burger-menu {
-    cursor: pointer;
+#burger-menu {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-right: 10px;
+    cursor: pointer;
 }
 
-.burger-menu .bar {
-    width: 25px;
-    height: 3px;
+.bar {
+    width: 30px;
+    height: 4px;
     background-color: #fff;
     margin: 4px 0;
+    transition: all 0.3s;
 }
 
-/* Navigation Styles */
-nav ul {
-    list-style: none;
+h1 {
+    font-size: 1.5rem;
+    color: gold;
+    text-shadow: 0px 0px 5px #ffd700;
+}
+
+#game-menu {
+    margin-top: 20px;
+    background-color: #1e1e1e;
+    width: 100%;
+    padding: 10px 0;
+}
+
+#game-menu ul {
     display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 50px;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.9);
-    width: 180px;
-    padding: 10px;
-    display: none; /* Hidden by default */
+    justify-content: space-around;
+    list-style-type: none;
 }
 
-nav ul.show {
-    display: block;
-}
-
-nav ul li {
-    margin: 10px 0;
-}
-
-nav ul li a {
+#game-menu a {
+    color: #ff4081;
     text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+#game-menu a:hover {
     color: #fff;
-    font-size: 16px;
-    padding: 10px;
-    display: block;
 }
 
-nav ul li a:hover {
-    background-color: #444;
-    border-radius: 5px;
+#game-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-/* Game Board Styles */
 #game-board {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
+    grid-template-columns: repeat(6, 1fr); /* Untuk grid 6x6 */
+    grid-gap: 10px;
+    padding: 20px;
+    background-color: #222;
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.6); /* Efek glowing emas */
 }
 
-.column img {
+#game-board img {
     width: 100%;
     height: auto;
-    border-radius: 5px;
-    transition: transform 0.5s ease-in-out;
+    border: 3px solid gold; /* Border glamor */
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Button Styles */
+#game-board img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.8);
+}
+
+#controls {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
 button {
-    background-color: gold;
-    color: black;
+    padding: 10px 20px;
+    background-color: #ff4081;
+    color: #fff;
     border: none;
     border-radius: 5px;
-    padding: 8px 12px;
-    font-size: 14px;
-    font-weight: bold;
     cursor: pointer;
-    margin: 8px;
     transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #fff700;
+    background-color: #f50057;
 }
 
-#spin-button, #auto-spin-button {
-    background-color: #f5c518;
-    font-size: 12px; /* Smaller for mobile */
-}
-
-button:disabled {
-    background-color: #666;
-    cursor: not-allowed;
-}
-
-/* Smaller stop button for responsive design */
-#stop-button {
-    background-color: red;
-    color: white;
-    font-size: 12px;
-    padding: 6px 10px;
-    margin: 8px;
-}
-
-/* Betting and Multiplier Controls */
-#bet-amount, #multiplier {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: gold;
-    border: 2px solid gold;
-    padding: 8px;
-    text-align: center;
-    font-size: 16px;
-    width: 70px;
-    margin: 5px;
-}
-
-#bet-increase, #bet-decrease, #multiplier-increase, #multiplier-decrease {
-    background-color: #333;
-    color: gold;
-    border-radius: 5px;
-    padding: 4px 8px;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-/* Control Styles */
-#controls {
+#score-panel {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Atur jarak antar elemen */
-    margin: 10px;
+    justify-content: space-between;
 }
 
 #auto-spin-container {
-    display: flex;
-    align-items: center; /* Pusatkan item di tengah */
+    margin-left: 20px;
 }
 
-#auto-spin-options {
-    margin-left: 5px; /* Ruang antara button dan dropdown */
-    padding: 5px;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: gold;
-    border: 2px solid gold;
-    border-radius: 5px;
-}
-
-/* Stop Button Styles */
-#stop-button {
-    background-color: #ff4747; /* Warna merah untuk tombol stop */
-    margin-left: 10px; /* Ruang antara tombol */
-}
-
-/* Responsive Styles for Controls */
-@media (max-width: 768px) {
-    #controls {
-        flex-direction: column; /* Menumpuk elemen secara vertikal di layar kecil */
-        align-items: flex-start; /* Rata kiri untuk item */
-    }
-
-    #auto-spin-container {
-        margin-top: 5px; /* Ruang atas untuk dropdown */
-    }
-}
-
-/* Score Display */
-#score {
-    font-size: 18px;
-    color: #fff;
-    padding: 10px;
-    margin-top: 20px;
-}
-
-#warning-message {
-    color: red;
-    font-size: 16px;
-    padding: 10px;
-    display: none; /* Hidden by default */
-}
-
-/* Footer */
-footer {
-    position: absolute;
-    bottom: 10px;
-    width: 100%;
-    text-align: center;
-    color: #ccc;
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    body {
-        padding: 15px;
-    }
-
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
+@media screen and (max-width: 768px) {
     #game-board {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 5px;
-    }
-
-    button {
-        width: 90%;
-        font-size: 12px;
-    }
-
-    #bet-amount, #multiplier {
-        width: 60px;
-        font-size: 14px;
-    }
-
-    #spin-button, #auto-spin-button {
-        padding: 6px 10px;
-        font-size: 10px; /* Reduced for mobile */
-    }
-
-    #bet-increase, #bet-decrease {
-        padding: 3px 6px;
-    }
-
-    nav ul {
-        width: 100%;
+        grid-template-columns: repeat(3, 1fr); /* Responsif untuk layar kecil */
     }
 }
