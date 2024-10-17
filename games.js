@@ -66,7 +66,7 @@ function randomizeIcons() {
 
 function getRandomIcon() {
     const iconPaths = [
-        'icon1.png', 'icon2.png', 'icon3.png', // dan seterusnya
+        'j.png', 'a.png', 'Diamond.png', 'luxury.png', 'gold.png','game.png','coin.png','treasure-chest.png'// dan seterusnya
     ];
     const randomIndex = Math.floor(Math.random() * iconPaths.length);
     return iconPaths[randomIndex];
