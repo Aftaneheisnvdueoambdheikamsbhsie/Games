@@ -45,13 +45,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 2000);
     }
 const gameBoard = document.getElementById('game-board');
-
 function startSpin() {
-    gameBoard.classList.add('scroll-effect'); // Mulai efek scroll
-    
+    const icons = gameBoard.querySelectorAll('img');
+    icons.forEach(icon => icon.classList.add('scroll-effect')); // Tambahkan efek scroll pada setiap ikon
+
     setTimeout(() => {
-        gameBoard.classList.remove('scroll-effect'); // Hentikan efek scroll setelah 2 detik
-        randomizeIcons();
+        icons.forEach(icon => icon.classList.remove('scroll-effect')); // Hapus efek scroll setelah 2 detik
+        randomizeIcons(); // Acak ikon setelah spin berhenti
     }, 2000);
 }
 
